@@ -1,0 +1,267 @@
+body {
+  margin: 0;
+  background: #15161d;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+.menu-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px 80px;
+}
+
+.category-section {
+  margin-bottom: 45px;
+}
+
+.category-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  text-align: left;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.menu-card {
+  background: #20212b;
+  border: 1px solid #333642;
+  border-radius: 18px;
+  padding: 18px;
+  min-height: 140px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.menu-card h3 {
+  font-size: 20px;
+  line-height: 1.3;
+  color: #ffffff;
+}
+
+.price {
+  margin-top: 14px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #d7b56d;
+}
+
+.add-button {
+  margin-top: 16px;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 18px;
+  background: #d7b56d;
+  color: #15161d;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  opacity: 0.9;
+}
+
+button {
+  cursor: pointer;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.quantity-controls button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #d7b56d;
+  color: #15161d;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.quantity-controls span {
+  min-width: 28px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+}
+
+.send-order-button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 14px;
+  background: #d7b56d;
+  color: #15161d;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.send-order-button:hover {
+  opacity: 0.9;
+}
+
+.cart-qty button{
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  font-size:20px;
+  font-weight:bold;
+}
+
+.hero-image{
+  width:100%;
+  max-width:1200px;
+  height:auto;
+  border-radius:24px;
+}
+
+
+.category-image{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+  margin-bottom: 50px;  
+}
+
+.cashier-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.cashier-page h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.orders-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.order-card {
+  background: #20212b;
+  border: 1px solid #333642;
+  border-radius: 18px;
+  padding: 20px;
+  text-align: left;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.status.new {
+  background: #ff6b6b;
+}
+
+.status.accepted {
+  background: #e0be6d;
+  color: #15161d;
+}
+
+.status.done {
+  background: #4caf50;
+}
+
+.order-time {
+  color: #aaa;
+  margin: 10px 0;
+}
+
+.order-items {
+  margin: 15px 0;
+}
+
+.order-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.order-actions button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #15161d;
+}
+
+.login-box {
+  width: 360px;
+  background: #20212b;
+  padding: 35px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-box h1 {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.login-box input {
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #15161d;
+  color: white;
+}
+
+.login-box button {
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #e0be6d;
+  color: #15161d;
+  font-weight: bold;
+  cursor: pointer;
+}
