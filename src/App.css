@@ -268,3 +268,27 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
+.subtitle {
+  margin-top: 10px;
+  color: #b8b8b8;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
+.lang-btn{
+  background:#20212b;
+  color:#E0BE6D;
+  border:1px solid #E0BE6D;
+  border-radius:10px;
+  padding:8px 16px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:.2s;
+}
+
+.lang-btn:hover{
+  background:#E0BE6D;
+  color:#15161d;
+}

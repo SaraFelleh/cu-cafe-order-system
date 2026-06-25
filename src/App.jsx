@@ -1,4 +1,5 @@
 import { FiShoppingCart } from "react-icons/fi";
+import { translations } from "./data/translations";
 import { useEffect, useState } from "react";
 import { menu } from "./data/menu";
 import { db } from "./firebase/firebase";
@@ -33,6 +34,8 @@ function App() {
     return () => unsubscribe();
   }, []);
 
+  const [language, setLanguage] = useState("de");
+  const t = translations[language];
   const table =
     new URLSearchParams(window.location.search).get("table") || "Unknown";
 
@@ -142,43 +145,64 @@ async function sendOrder() {
     overflow: "visible",
   }}
 >
+<div
+  style={{
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "14px",
+    overflow: "visible",
+  }}
+>
+  <h1
+    style={{
+      margin: 0,
+      fontSize: "64px",
+      fontWeight: "800",
+      lineHeight: "1",
+      letterSpacing: "1px",
+      background:
+        "linear-gradient(180deg, #FFF2D5 0%, #F2C97D 20%, #C8873F 45%, #8F5728 70%, #F4D18C 100%)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
+      textShadow: "0 2px 4px rgba(184,115,51,0.12)",
+    }}
+  >
+    Cu Café
+  </h1>
+
+  <h2
+    style={{
+      margin: 0,
+      fontSize: "26px",
+      lineHeight: "1",
+      color: "#ffffff",
+    }}
+  >
+      {t.table} {table}
+  </h2>
+
   <div
     style={{
       display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "14px",
-      overflow: "visible",
+      gap: "10px",
+      marginTop: "8px",
     }}
   >
-    <h1
-      style={{
-        margin: 0,
-        fontSize: "64px",
-        fontWeight: "800",
-        lineHeight: "1",
-        letterSpacing: "1px",
-        background:
-          "linear-gradient(180deg, #FFF2D5 0%, #F2C97D 20%, #C8873F 45%, #8F5728 70%, #F4D18C 100%)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        textShadow: "0 2px 4px rgba(184,115,51,0.12)",
-      }}
-    >
-      Cu Café
-    </h1>
+    <button onClick={() => setLanguage("de")} className="lang-btn">
+      🇩🇪
+    </button>
 
-    <h2
-      style={{
-        margin: 0,
-        fontSize: "26px",
-        lineHeight: "1",
-        color: "#ffffff",
-      }}
-    >
-      Table {table}
-    </h2>
+    <button onClick={() => setLanguage("en")} className="lang-btn">
+      EN
+    </button>
+
+    <button onClick={() => setLanguage("ar")} className="lang-btn">
+      AR
+    </button>
   </div>
+
+</div>
 
   <button
     onClick={() => setIsCartOpen(true)}
@@ -225,15 +249,45 @@ async function sendOrder() {
       className="category-image"
      />
       <h2 className="category-title">
-        {category.icon} {category.category}
+        {category.icon} {t[category.category] || category.category}
       </h2>
+{category.description && (
+  <div className="category-description">
+    <p>
+      {typeof category.description === "string"
+        ? category.description
+        : Array.isArray(category.description)
+        ? category.description.join(" ")
+        : category.description[language]}
+    </p>
+  </div>
+)}
+
+{category.notes && (
+  <div className="category-notes">
+    {(Array.isArray(category.notes)
+      ? category.notes
+      : category.notes[language] || []
+    ).map((line, index) => (
+      <p key={index}>* {line}</p>
+    ))}
+  </div>
+)}
 
       <div className="menu-grid">
         {category.items.map((item) => (
 <div className="menu-card" key={item.id}>
-  <h3>{item.name}</h3>
+  <h3>{item.name[language]}</h3>
 
-  <p className="price">{item.price.toFixed(2)}€</p>
+  {item.subtitle && (
+  <p className="subtitle">
+    {item.subtitle[language]}
+  </p>
+)}
+
+  <p className="price">
+    {item.priceText || (item.price != null ? `${item.price.toFixed(2)}€` : "{t.askStaff}")}
+  </p>
 
   {cart.find((cartItem) => cartItem.id === item.id) ? (
     <div className="quantity-controls">
@@ -257,7 +311,7 @@ async function sendOrder() {
       className="add-button"
       onClick={() => addToCart(item)}
     >
-      Add
+      {t.add}
     </button>
   )}
 </div>
@@ -301,7 +355,7 @@ async function sendOrder() {
 </button>
 
     <h2 style={{ color: "#E0BE6D", textAlign: "center" }}>
-      Your Order
+      {t.yourOrder}
     </h2>
 
 <p
@@ -315,11 +369,11 @@ async function sendOrder() {
     letterSpacing: "2px",
   }}
 >
-  TABLE {table}
+  {t.table} {table}
 </p>
 
     {cart.length === 0 ? (
-      <p>No items yet</p>
+      <p>{t.noItems}</p>
     ) : (
       <>
         {cart.map((item) => (
@@ -334,10 +388,12 @@ async function sendOrder() {
           </div>
         ))}
 
-        <h3>Total: {total.toFixed(2)}€</h3>
+        <h3>
+            {t.total}: {total.toFixed(2)}€
+        </h3>
 
         <button className="send-order-button" onClick={sendOrder}>
-          Send Order
+          {t.sendOrder}
         </button>
       </>
     )}

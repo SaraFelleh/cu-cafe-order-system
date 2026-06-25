@@ -108,3 +108,27 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+.category-description {
+  text-align: left;
+  color: #cfcfcf;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.category-notes {
+  text-align: left;
+  color: #e0be6d;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 18px 0 25px;
+}
+
+.subtitle {
+  margin-top: 10px;
+  color: #b8b8b8;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: pre-line;
+}

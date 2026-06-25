@@ -1,0 +1,58 @@
+export const translations = {
+  de: {
+    add: "Hinzufügen",
+    yourOrder: "Ihre Bestellung",
+    noItems: "Noch keine Artikel",
+    sendOrder: "Bestellung senden",
+    total: "Gesamt",
+    table: "Tisch",
+    askStaff: "Bitte fragen Sie unser Team",
+
+    Coffee: "Coffee",
+    Tea: "Tea",
+    "Cold Drinks": "Cold Drinks",
+    Smoothies: "Smoothies",
+    "Special Drinks & Cakes": "Special Drinks & Cakes",
+    Snacks: "Snacks",
+    Breakfast: "Breakfast",
+    Mittagessen: "Mittagessen",
+  },
+
+  en: {
+    add: "Add",
+    yourOrder: "Your Order",
+    noItems: "No items yet",
+    sendOrder: "Send Order",
+    total: "Total",
+    table: "Table",
+    askStaff: "Ask Staff",
+
+    Coffee: "Coffee",
+    Tea: "Tea",
+    "Cold Drinks": "Cold Drinks",
+    Smoothies: "Smoothies",
+    "Special Drinks & Cakes": "Special Drinks & Cakes",
+    Snacks: "Snacks",
+    Breakfast: "Breakfast",
+    Mittagessen: "Lunch",
+  },
+
+  ar: {
+    add: "إضافة",
+    yourOrder: "طلبك",
+    noItems: "لا توجد عناصر بعد",
+    sendOrder: "إرسال الطلب",
+    total: "المجموع",
+    table: "الطاولة",
+    askStaff: "يرجى سؤال الفريق",
+
+    Coffee: "القهوة",
+    Tea: "الشاي",
+    "Cold Drinks": "المشروبات الباردة",
+    Smoothies: "سموذي",
+    "Special Drinks & Cakes": "مشروبات خاصة وحلويات",
+    Snacks: "وجبات خفيفة",
+    Breakfast: "الفطور",
+    Mittagessen: "الغداء",
+  },
+};
