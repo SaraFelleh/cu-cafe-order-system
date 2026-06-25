@@ -107,7 +107,7 @@ export const menu = [
 {
   category: "Mittagessen",
   icon: "🍽️",
-  image: "/images/coffee-menu.png",
+  image: "/images/mittagessen.png",
   items: [
       { id: 53, name: "Falafel Pita", price: 7.0 },
       { id: 54, name: "Halloumi Pita", price: 7.0 },
