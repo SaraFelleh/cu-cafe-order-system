@@ -91,9 +91,9 @@ export const menu = [
     ],
   },
 {
-  category: "Breakfast",
+  category: "Frühstück",
   icon: "🍳",
-  image: "/images/coffee-menu.png",
+  image: "/images/frühstück.png",
   items: [
       { id: 47, name: "Shakshuka", price: 12.9 },
       { id: 48, name: "Rührei / Scrambled Eggs", price: 6.9 },
