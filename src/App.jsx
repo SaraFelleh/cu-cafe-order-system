@@ -8,6 +8,7 @@ import {
   getDoc,
   setDoc,
   updateDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import Cashier from "./pages/Cashier";
 import "./App.css";
@@ -114,7 +115,7 @@ async function sendOrder() {
     items: cart,
     total: total,
     status: "new",
-    createdAt: new Date().toLocaleString(),
+    createdAt: serverTimestamp(),
     };
     console.log(order);
     await addDoc(collection(db, "orders"), order);

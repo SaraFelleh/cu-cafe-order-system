@@ -74,7 +74,11 @@ function Cashier() {
                 </span>
               </div>
 
-              <p className="order-time">{order.createdAt}</p>
+              <p className="order-time">
+  {order.createdAt?.toDate
+    ? order.createdAt.toDate().toLocaleString()
+    : order.createdAt || "Loading..."}
+</p>
 
               <div className="order-items">
                 {order.items?.map((item, index) => (
@@ -133,7 +137,11 @@ function Cashier() {
                     </span>
                   </div>
 
-                  <p className="order-time">{order.createdAt}</p>
+                  <p className="order-time">
+                    {order.createdAt?.toDate
+                      ? order.createdAt.toDate().toLocaleString()
+                      : order.createdAt || "Loading..."}
+                  </p>
 
                   <div className="order-items">
                     {order.items?.map((item, index) => (
