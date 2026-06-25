@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const [user, setUser] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -109,7 +110,6 @@ async function sendOrder() {
       });
     }
 
-    const formattedOrderNumber = String(orderNumber).padStart(3, "0");
     const order = {
      orderNumber: String(orderNumber).padStart(3, "0"),
     table: table,
@@ -121,8 +121,7 @@ async function sendOrder() {
     console.log(order);
     await addDoc(collection(db, "orders"), order);
 
-    alert("Ihre Bestellung wurde gesendet. Bitte zahlen Sie an der Kasse.");
-
+    setShowSuccess(true);
     setCart([]);
     setIsCartOpen(false);
   } catch (error) {
@@ -342,6 +341,74 @@ async function sendOrder() {
         </button>
       </>
     )}
+  </div>
+)}
+
+{showSuccess && (
+  <div
+    style={{
+      position: "fixed",
+      inset: 0,
+      background: "rgba(0,0,0,0.65)",
+      backdropFilter: "blur(5px)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 9999,
+    }}
+  >
+    <div
+      style={{
+        background: "#20212b",
+        border: "2px solid #E0BE6D",
+        borderRadius: "22px",
+        padding: "35px",
+        width: "390px",
+        maxWidth: "90%",
+        textAlign: "center",
+        color: "white",
+      }}
+    >
+      <div
+        style={{
+          width: "70px",
+          height: "70px",
+          margin: "0 auto 20px",
+          borderRadius: "50%",
+          background: "#E0BE6D",
+          color: "#15161d",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "40px",
+          fontWeight: "bold",
+        }}
+      >
+        ✓
+      </div>
+
+      <h2 style={{ color: "#E0BE6D", marginBottom: "20px" }}>
+        Vielen Dank!
+      </h2>
+
+      <p style={{ lineHeight: "1.8", fontSize: "17px" }}>
+        Ihre Bestellung wurde erfolgreich übermittelt.
+        <br /><br />
+        Bitte bezahlen Sie an der Kasse.
+        <br /><br />
+        Vielen Dank für Ihren Besuch im <b>Cu Café</b>.
+        <br />
+        Wir wünschen Ihnen einen schönen Aufenthalt! ☕
+      </p>
+
+      <button
+        onClick={() => setShowSuccess(false)}
+        className="send-order-button"
+        style={{ marginTop: "25px" }}
+      >
+        OK
+      </button>
+    </div>
   </div>
 )}
     </div>
