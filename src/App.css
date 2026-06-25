@@ -135,10 +135,13 @@ button {
 }
 
 .hero-image{
-  width:100%;
-  max-width:1200px;
-  height:auto;
-  border-radius:24px;
+  display: block;
+  width: calc(100% - 40px);
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 24px;
 }
 
 

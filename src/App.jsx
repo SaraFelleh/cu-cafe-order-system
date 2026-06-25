@@ -1,3 +1,4 @@
+import { FiShoppingCart } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { menu } from "./data/menu";
 import { db } from "./firebase/firebase";
@@ -131,41 +132,84 @@ async function sendOrder() {
 }
   return (
     <div>
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          background: "#15161d",
-          padding: "28px 16px 24px",
-          zIndex: 100,
-          borderBottom: "1px solid #333",
-        }}
-      >
-        <h1 style={{ marginBottom: "12px" }}>Cu Café</h1>
-        <h2>Table {table}</h2>
-
-        <button
-          onClick={() => setIsCartOpen(true)}
-          style={{
-            position: "fixed",
-            top: "20px",
-            right: "20px",
-            width: "70px",
-            height: "70px",
-            borderRadius: "50%",
-            border: "none",
-            background: "#E0BE6D",
-            color: "#1f212b",
-            fontSize: "24px",
-            fontWeight: "bold",
-            cursor: "pointer",
-            zIndex: 1000,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-          }}
+<header
+  style={{
+    position: "sticky",
+    top: 0,
+    background: "#15161d",
+    padding: "28px 90px 24px",
+    zIndex: 100,
+    borderBottom: "1px solid #333",
+    overflow: "visible",
+  }}
 >
-🛒 {cartItemsCount}
-</button>
-      </header>
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "14px",
+      overflow: "visible",
+    }}
+  >
+    <h1
+      style={{
+        margin: 0,
+        fontSize: "64px",
+        fontWeight: "800",
+        lineHeight: "1",
+        letterSpacing: "1px",
+        background:
+          "linear-gradient(180deg, #FFF2D5 0%, #F2C97D 20%, #C8873F 45%, #8F5728 70%, #F4D18C 100%)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        textShadow: "0 2px 4px rgba(184,115,51,0.12)",
+      }}
+    >
+      Cu Café
+    </h1>
+
+    <h2
+      style={{
+        margin: 0,
+        fontSize: "26px",
+        lineHeight: "1",
+        color: "#ffffff",
+      }}
+    >
+      Table {table}
+    </h2>
+  </div>
+
+  <button
+    onClick={() => setIsCartOpen(true)}
+    style={{
+      position: "fixed",
+      top: "25px",
+      right: "30px",
+      width: "60px",
+      height: "60px",
+      borderRadius: "18px",
+      border: "2px solid #E0BE6D",
+      background: "#1f212b",
+      color: "#E0BE6D",
+      fontSize: "24px",
+      fontWeight: "bold",
+      cursor: "pointer",
+      zIndex: 1000,
+      boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: "6px",
+    }}
+  >
+    <>
+    <FiShoppingCart size={24} />
+    <span>{cartItemsCount}</span>
+   </>
+  </button>
+</header>
 
 <img
   src="/images/coffee-menu.png"
@@ -261,9 +305,19 @@ async function sendOrder() {
       Your Order
     </h2>
 
-    <p style={{ textAlign: "center", marginBottom: "20px" }}>
-      Table {table}
-    </p>
+<p
+  style={{
+    textAlign: "center",
+    marginBottom: "25px",
+    fontSize: "20px",
+    color: "#F2C97D",
+    fontWeight: "700",
+    textTransform: "uppercase",
+    letterSpacing: "2px",
+  }}
+>
+  TABLE {table}
+</p>
 
     {cart.length === 0 ? (
       <p>No items yet</p>
