@@ -2,7 +2,7 @@ export const menu = [
   {
     category: "Coffee",
     icon: "☕",
-    image: "/images/coffee-menu.png",
+    image: "/images/coffee.png",
 
     description: {
       de: "Vollmundig und säurearm mit nüssig-schokoladigen Aromen",
