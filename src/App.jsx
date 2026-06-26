@@ -333,8 +333,10 @@ return (
 {showSuccess && (
   <SuccessModal
     onClose={() => setShowSuccess(false)}
+    language={language}
   />
 )}
+
     </div>
   );
 }

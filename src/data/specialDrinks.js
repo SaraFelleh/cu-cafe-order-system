@@ -26,7 +26,7 @@ const specialDrinks = [
       name: {
         de: "Yerba Mate",
         en: "Yerba Mate",
-        ar: "يربا ماته",
+        ar: "متة",
       },
       subtitle: {
         de: "Traditioneller Mate-Tee aus Südamerika.",

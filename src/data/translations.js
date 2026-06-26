@@ -23,6 +23,11 @@ export const translations = {
     Frühstück: "Frühstück",
     Mittagessen: "Mittagessen",
     orderError: "Fehler beim Senden der Bestellung",
+    thankYou: "Vielen Dank!",
+    orderSent: "Ihre Bestellung wurde erfolgreich übermittelt.",
+    payAtCashier: "Bitte bezahlen Sie an der Kasse.",
+    thanksVisit: "Vielen Dank für Ihren Besuch im",
+    haveNiceStay: "Wir wünschen Ihnen einen schönen Aufenthalt!",
   },
 
   en: {
@@ -49,6 +54,11 @@ export const translations = {
     Frühstück: "Breakfast",
     Mittagessen: "Lunch",
     orderError: "Error sending order",
+    thankYou: "Thank you!",
+    orderSent: "Your order has been sent successfully.",
+    payAtCashier: "Please pay at the cashier.",
+    thanksVisit: "Thank you for visiting",
+    haveNiceStay: "We wish you a pleasant stay!",
   },
 
   ar: {
@@ -75,5 +85,10 @@ export const translations = {
     Frühstück: "الفطور",
     Mittagessen: "الغداء",
     orderError: "حدث خطأ أثناء إرسال الطلب",
+    thankYou: "شكراً لك!",
+    orderSent: "تم إرسال طلبك بنجاح.",
+    payAtCashier: "يرجى الدفع عند الكاشير.",
+    thanksVisit: "شكراً لزيارتكم",
+    haveNiceStay: "نتمنى لكم وقتاً ممتعاً!",
   },
 };

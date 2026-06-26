@@ -1,21 +1,25 @@
-function SuccessModal({ onClose }) {
+import { translations } from "../data/translations";
+
+function SuccessModal({ onClose, language }) {
+  const t = translations[language];
+
   return (
     <div className="success-overlay">
       <div className="success-box">
         <div className="success-icon">✓</div>
 
-        <h2 className="success-title">Vielen Dank!</h2>
+        <h2 className="success-title">{t.thankYou}</h2>
 
         <p className="success-text">
-          Ihre Bestellung wurde erfolgreich übermittelt.
+          {t.orderSent}
           <br />
           <br />
-          Bitte bezahlen Sie an der Kasse.
+          {t.payAtCashier}
           <br />
           <br />
-          Vielen Dank für Ihren Besuch im <b>Cu Café</b>.
+          {t.thanksVisit} <b>Cu Café</b>.
           <br />
-          Wir wünschen Ihnen einen schönen Aufenthalt! ☕
+          {t.haveNiceStay} ☕
         </p>
 
         <button onClick={onClose} className="send-order-button success-button">
