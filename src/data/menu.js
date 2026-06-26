@@ -95,12 +95,21 @@ items: [
   {
     id: 7,
     name: {
-      de: "Cappuccino 0.2 / 0.3",
-      en: "Cappuccino 0.2 / 0.3",
-      ar: "كابتشينو 0.2 / 0.3",
+      de: "Cappuccino",
+      en: "Cappuccino",
+      ar: "كابتشينو",
     },
-    priceText: "3,60€ / 4,50€",
-    price: 3.6,
+    price: 3.4,
+    priceText: "3,40€ / 4,50€",
+    sizes: [
+      { id: "02", name: "0.2L", price: 3.4 },
+      { id: "03", name: "0.3L", price: 4.5 },
+    ],
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -111,6 +120,11 @@ items: [
       ar: "موكاتشينو",
     },
     price: 4.5,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -121,6 +135,11 @@ items: [
       ar: "فلات وايت",
     },
     price: 4.2,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -131,6 +150,11 @@ items: [
       ar: "كافيه لاتيه",
     },
     price: 4.5,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -141,6 +165,11 @@ items: [
       ar: "لاتيه ماكياتو",
     },
     price: 4.2,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -151,6 +180,11 @@ items: [
       ar: "شاي لاتيه",
     },
     price: 4.3,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -161,6 +195,11 @@ items: [
       ar: "شوكولاتة ساخنة",
     },
     price: 4.3,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 
   {
@@ -171,9 +210,15 @@ items: [
       ar: "ماتشا لاتيه",
     },
     price: 4.5,
+    extras: [
+      { id: "cow", name: { de: "Vollmilch", en: "Cow Milk", ar: "حليب كامل الدسم" }, price: 0 },
+      { id: "oat", name: { de: "Hafermilch", en: "Oat Milk", ar: "حليب الشوفان" }, price: 0 },
+      { id: "soy", name: { de: "Sojamilch", en: "Soy Milk", ar: "حليب الصويا" }, price: 0 },
+    ],
   },
 ],
 },
+
 {
   category: "Tea",
   icon: "🍵",

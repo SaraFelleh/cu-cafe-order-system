@@ -8,13 +8,13 @@ export const translations = {
     table: "Tisch",
     askStaff: "Bitte fragen Sie unser Team",
 
-    Coffee: "Coffee",
+    Coffee: "Kaffee",
     Tea: "Tea",
     "Cold Drinks": "Cold Drinks",
     Smoothies: "Smoothies",
     "Special Drinks & Cakes": "Special Drinks & Cakes",
     Snacks: "Snacks",
-    Breakfast: "Breakfast",
+    Frühstück: "Frühstück",
     Mittagessen: "Mittagessen",
   },
 
@@ -33,7 +33,7 @@ export const translations = {
     Smoothies: "Smoothies",
     "Special Drinks & Cakes": "Special Drinks & Cakes",
     Snacks: "Snacks",
-    Breakfast: "Breakfast",
+    Frühstück: "Breakfast",
     Mittagessen: "Lunch",
   },
 
@@ -52,7 +52,7 @@ export const translations = {
     Smoothies: "سموذي",
     "Special Drinks & Cakes": "مشروبات خاصة وحلويات",
     Snacks: "وجبات خفيفة",
-    Breakfast: "الفطور",
+    Frühstück: "الفطور",
     Mittagessen: "الغداء",
   },
 };

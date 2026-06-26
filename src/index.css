@@ -132,3 +132,9 @@ code {
   line-height: 1.5;
   white-space: pre-line;
 }
+
+.extra-btn.selected {
+  background: #d7b56d;
+  color: #15161d;
+  font-weight: bold;
+}
