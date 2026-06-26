@@ -83,7 +83,7 @@ function selectExtra(itemKey, extra) {
     const selectedSize = selectedSizes[itemKey];
     const selectedExtras = selectedOptions[itemKey] || [];
 
-    const basePrice = selectedSize ? selectedSize.price : item.price;
+    const basePrice = selectedSize ? selectedSize.price : item.price || 0;
     const extraPrice = selectedExtras.reduce(
      (sum, extra) => sum + extra.price,
      0
@@ -191,7 +191,8 @@ try {
 
     return 1;
   });
-
+      console.log("Cart before sending:", cart);
+      console.log("Total before sending:", total);
       const order = {
         orderNumber: String(orderNumber).padStart(3, "0"),
         table: table,
