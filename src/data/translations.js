@@ -1,6 +1,12 @@
 export const translations = {
   de: {
     add: "Hinzufügen",
+    addToCart: "In den Warenkorb",
+    selectOptions: "Optionen auswählen",
+    hideOptions: "Ausblenden",
+    size: "Größe",
+    extras: "Extras",
+
     yourOrder: "Ihre Bestellung",
     noItems: "Noch keine Artikel",
     sendOrder: "Bestellung senden",
@@ -16,10 +22,17 @@ export const translations = {
     Snacks: "Snacks",
     Frühstück: "Frühstück",
     Mittagessen: "Mittagessen",
+    orderError: "Fehler beim Senden der Bestellung",
   },
 
   en: {
     add: "Add",
+    addToCart: "Add to Cart",
+    selectOptions: "Select Options",
+    hideOptions: "Hide",
+    size: "Size",
+    extras: "Extras",
+
     yourOrder: "Your Order",
     noItems: "No items yet",
     sendOrder: "Send Order",
@@ -35,10 +48,17 @@ export const translations = {
     Snacks: "Snacks",
     Frühstück: "Breakfast",
     Mittagessen: "Lunch",
+    orderError: "Error sending order",
   },
 
   ar: {
     add: "إضافة",
+    addToCart: "إضافة إلى السلة",
+    selectOptions: "اختر الخيارات",
+    hideOptions: "إخفاء",
+    size: "الحجم",
+    extras: "الإضافات",
+
     yourOrder: "طلبك",
     noItems: "لا توجد عناصر بعد",
     sendOrder: "إرسال الطلب",
@@ -54,5 +74,6 @@ export const translations = {
     Snacks: "وجبات خفيفة",
     Frühstück: "الفطور",
     Mittagessen: "الغداء",
+    orderError: "حدث خطأ أثناء إرسال الطلب",
   },
 };

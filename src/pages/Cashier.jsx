@@ -9,6 +9,37 @@ function Cashier() {
   const previousNewOrdersCount = useRef(0);
   const firstLoad = useRef(true);
 
+  function getText(value) {
+    if (!value) return "";
+    if (typeof value === "object") return value.de || value.en || value.ar || "";
+    return value;
+  }
+
+  function renderOrderItems(items) {
+    return items?.map((item, index) => (
+      <div key={index} className="cashier-order-item">
+        <p>
+          {item.quantity ? `${item.quantity}× ` : ""}
+          {getText(item.name)} - {Number(item.price || 0).toFixed(2)}€
+        </p>
+
+        {item.selectedSize && (
+          <p className="cart-item-detail">
+            Größe: {getText(item.selectedSize.name)}
+          </p>
+        )}
+
+        {item.selectedExtras?.length > 0 &&
+         item.selectedExtras.map((extra) => (
+       <p className="cart-item-detail" key={extra.id}>
+        Auswahl: {getText(extra.name)}
+        {extra.price > 0 && ` +${extra.price.toFixed(2)}€`}
+       </p>
+      ))}
+      </div>
+    ));
+  }
+
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "orders"), (snapshot) => {
       const ordersData = snapshot.docs.map((document) => ({
@@ -75,18 +106,13 @@ function Cashier() {
               </div>
 
               <p className="order-time">
-  {order.createdAt?.toDate
-    ? order.createdAt.toDate().toLocaleString()
-    : order.createdAt || "Loading..."}
-</p>
+                {order.createdAt?.toDate
+                  ? order.createdAt.toDate().toLocaleString()
+                  : order.createdAt || "Loading..."}
+              </p>
 
               <div className="order-items">
-                {order.items?.map((item, index) => (
-                  <p key={index}>
-                    {item.quantity ? `${item.quantity}× ` : ""}
-                    {item.name} - {item.price}€
-                  </p>
-                ))}
+                {renderOrderItems(order.items)}
               </div>
 
               <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
@@ -144,12 +170,7 @@ function Cashier() {
                   </p>
 
                   <div className="order-items">
-                    {order.items?.map((item, index) => (
-                      <p key={index}>
-                        {item.quantity ? `${item.quantity}× ` : ""}
-                        {item.name} - {item.price}€
-                      </p>
-                    ))}
+                    {renderOrderItems(order.items)}
                   </div>
 
                   <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
