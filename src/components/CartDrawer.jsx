@@ -6,6 +6,8 @@ function CartDrawer({
   table,
   t,
   total,
+  orderNote,
+  setOrderNote,
   onClose,
   onSendOrder,
   onDecrease,
@@ -70,12 +72,19 @@ function CartDrawer({
           ))}
 
           <h3>
-            {t.total}: {total.toFixed(2)}€
-          </h3>
+  {t.total}: {total.toFixed(2)}€
+</h3>
 
-          <button className="send-order-button" onClick={onSendOrder}>
-            {t.sendOrder}
-          </button>
+      <textarea
+        className="order-note"
+        placeholder={t.orderNote}
+        value={orderNote}
+        onChange={(e) => setOrderNote(e.target.value)}
+      />
+
+      <button className="send-order-button" onClick={onSendOrder}>
+        {t.sendOrder}
+      </button>
         </>
       )}
     </div>

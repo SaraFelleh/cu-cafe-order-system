@@ -6,14 +6,12 @@ export const translations = {
     hideOptions: "Ausblenden",
     size: "Größe",
     extras: "Extras",
-
     yourOrder: "Ihre Bestellung",
     noItems: "Noch keine Artikel",
     sendOrder: "Bestellung senden",
     total: "Gesamt",
     table: "Tisch",
     askStaff: "Bitte fragen Sie unser Team",
-
     Coffee: "Kaffee",
     Tea: "Tea",
     "Cold Drinks": "Cold Drinks",
@@ -24,11 +22,14 @@ export const translations = {
     Mittagessen: "Mittagessen",
     orderError: "Fehler beim Senden der Bestellung",
     selectSizeRequired: "Bitte wählen Sie eine Größe aus.",
+    callStaff: "Mitarbeiter rufen",
+    staffCalled: "Ein Mitarbeiter wurde informiert.",
     thankYou: "Vielen Dank!",
     orderSent: "Ihre Bestellung wurde erfolgreich übermittelt.",
     payAtCashier: "Bitte bezahlen Sie an der Kasse.",
     thanksVisit: "Vielen Dank für Ihren Besuch im",
     haveNiceStay: "Wir wünschen Ihnen einen schönen Aufenthalt!",
+    orderNote: "Notiz zur Bestellung",
   },
 
   en: {
@@ -38,14 +39,12 @@ export const translations = {
     hideOptions: "Hide",
     size: "Size",
     extras: "Extras",
-
     yourOrder: "Your Order",
     noItems: "No items yet",
     sendOrder: "Send Order",
     total: "Total",
     table: "Table",
     askStaff: "Ask Staff",
-
     Coffee: "Coffee",
     Tea: "Tea",
     "Cold Drinks": "Cold Drinks",
@@ -56,11 +55,14 @@ export const translations = {
     Mittagessen: "Lunch",
     orderError: "Error sending order",
     selectSizeRequired: "Please select a size.",
+    callStaff: "Call Staff",
+    staffCalled: "Staff has been notified.",
     thankYou: "Thank you!",
     orderSent: "Your order has been sent successfully.",
     payAtCashier: "Please pay at the cashier.",
     thanksVisit: "Thank you for visiting",
     haveNiceStay: "We wish you a pleasant stay!",
+    orderNote: "Order note",
   },
 
   ar: {
@@ -70,14 +72,12 @@ export const translations = {
     hideOptions: "إخفاء",
     size: "الحجم",
     extras: "الإضافات",
-
     yourOrder: "طلبك",
     noItems: "لا توجد عناصر بعد",
     sendOrder: "إرسال الطلب",
     total: "المجموع",
     table: "الطاولة",
     askStaff: "يرجى سؤال الفريق",
-
     Coffee: "القهوة",
     Tea: "الشاي",
     "Cold Drinks": "المشروبات الباردة",
@@ -88,10 +88,13 @@ export const translations = {
     Mittagessen: "الغداء",
     orderError: "حدث خطأ أثناء إرسال الطلب",
     selectSizeRequired: "يرجى اختيار الحجم أولاً.",
+    callStaff: "طلب موظف",
+    staffCalled: "تم إبلاغ الموظف.",
     thankYou: "شكراً لك!",
     orderSent: "تم إرسال طلبك بنجاح.",
     payAtCashier: "يرجى الدفع عند الكاشير.",
     thanksVisit: "شكراً لزيارتكم",
     haveNiceStay: "نتمنى لكم وقتاً ممتعاً!",
+    orderNote: "ملاحظة للطلب",
   },
 };

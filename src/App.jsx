@@ -29,7 +29,8 @@ function App() {
   const [openOptions, setOpenOptions] = useState({});
   const [authLoading, setAuthLoading] = useState(true);
   const [language, setLanguage] = useState("de");
-
+  const [staffCalled, setStaffCalled] = useState(false);
+  const [orderNote, setOrderNote] = useState("");
   const t = translations[language];
 
   useEffect(() => {
@@ -58,7 +59,15 @@ function App() {
     return <Cashier />;
   }
 
-function selectExtra(itemKey, extra) {
+function selectExtra(itemKey, extra, item) {
+  if (item.multipleExtras === false) {
+    setSelectedOptions({
+      ...selectedOptions,
+      [itemKey]: [extra],
+    });
+    return;
+  }
+
   const currentExtras = selectedOptions[itemKey] || [];
   const alreadySelected = currentExtras.some(
     (selectedExtra) => selectedExtra.id === extra.id
@@ -198,12 +207,13 @@ try {
       console.log("Cart before sending:", cart);
       console.log("Total before sending:", total);
       const order = {
-        orderNumber: String(orderNumber).padStart(3, "0"),
-        table: table,
-        items: cart,
-        total: total,
-        status: "new",
-        createdAt: serverTimestamp(),
+       orderNumber: String(orderNumber).padStart(3, "0"),
+       table: table,
+       items: cart,
+       total: total,
+       note: orderNote,
+       status: "new",
+       createdAt: serverTimestamp(),
       };
 
       console.log(order);
@@ -211,21 +221,47 @@ try {
 
       setShowSuccess(true);
       setCart([]);
+      setOrderNote("");
       setIsCartOpen(false);
     } catch (error) {
       console.error(error);
       alert(t.orderError)
     }
   }
+
+  async function callStaff() {
+  try {
+    await addDoc(collection(db, "staffCalls"), {
+      table: table,
+      status: "new",
+      createdAt: serverTimestamp(),
+    });
+
+    setStaffCalled(true);
+
+    setTimeout(() => {
+      setStaffCalled(false);
+    }, 2500);
+  } catch (error) {
+    console.error(error);
+    alert(t.orderError);
+  }
+}
+
+
 return (
   <div dir={language === "ar" ? "rtl" : "ltr"}>
-    <Header
-      t={t}
-      table={table}
-      cartItemsCount={cartItemsCount}
-      setLanguage={setLanguage}
-      onOpenCart={() => setIsCartOpen(true)}
-    />
+<Header
+  t={t}
+  table={table}
+  cartItemsCount={cartItemsCount}
+  setLanguage={setLanguage}
+  onOpenCart={() => setIsCartOpen(true)}
+  onCallStaff={callStaff}
+  staffCalled={staffCalled}
+/>
+
+
 
     <div className="category-nav">
       {menu.map((category) => (
@@ -246,53 +282,69 @@ return (
       ))}
     </div>
 
-    <img
-      src="/images/coffee-menu.png"
-      alt="Coffee menu"
-      className="hero-image"
-    />
 
-    <div className="menu-container">
-      {menu.map((category) => (
-        <section
-          id={category.category.replace(/\s+/g, "-")}
-          className="category-section"
-          key={category.category}
-        >
-          <img
-            src={category.image}
-            alt={category.category}
-            className="category-image"
-          />
+<div className="menu-container">
+  {menu.map((category) => (
+    <section
+      id={category.category.replace(/\s+/g, "-")}
+      className="category-section"
+      key={category.category}
+    >
+      <img
+        src={category.image}
+        alt={category.category}
+        className="category-image"
+      />
 
-          <h2 className="category-title">
-            {category.icon} {t[category.category] || category.category}
-          </h2>
+      <div className="category-nav category-nav-inside">
+        {menu.map((cat) => (
+          <button
+            key={cat.category}
+            className={`category-nav-btn ${
+              cat.category === category.category ? "active" : ""
+            }`}
+            onClick={() =>
+              document
+                .getElementById(cat.category.replace(/\s+/g, "-"))
+                ?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                })
+            }
+          >
+            {cat.icon} {t[cat.category] || cat.category}
+          </button>
+        ))}
+      </div>
 
-          {category.description && (
-            <div className="category-description">
-              <p>
-                {typeof category.description === "string"
-                  ? category.description
-                  : Array.isArray(category.description)
-                  ? category.description.join(" ")
-                  : category.description[language]}
-              </p>
-            </div>
-          )}
+      <h2 className="category-title">
+        {category.icon} {t[category.category] || category.category}
+      </h2>
 
-          {category.notes && (
-            <div className="category-notes">
-              {(Array.isArray(category.notes)
-                ? category.notes
-                : category.notes[language] || []
-              ).map((line, index) => (
-                <p key={index}>* {line}</p>
-              ))}
-            </div>
-          )}
+      {category.description && (
+        <div className="category-description">
+          <p>
+            {typeof category.description === "string"
+              ? category.description
+              : Array.isArray(category.description)
+              ? category.description.join(" ")
+              : category.description[language]}
+          </p>
+        </div>
+      )}
 
-          
+      {category.notes && (
+        <div className="category-notes">
+          {(Array.isArray(category.notes)
+            ? category.notes
+            : category.notes[language] || []
+          ).map((line, index) => (
+            <p key={index}>* {line}</p>
+          ))}
+        </div>
+      )}
+
+
 <div className="menu-grid">
   {category.items.map((item) => {
     const itemKey = `${category.category}-${item.id}`;
@@ -351,6 +403,8 @@ return (
     table={table}
     t={t}
     total={total}
+    orderNote={orderNote}
+    setOrderNote={setOrderNote}
     onClose={() => setIsCartOpen(false)}
     onSendOrder={sendOrder}
     onDecrease={decreaseQuantity}

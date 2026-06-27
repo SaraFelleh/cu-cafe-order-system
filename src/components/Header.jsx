@@ -6,6 +6,8 @@ function Header({
   cartItemsCount,
   setLanguage,
   onOpenCart,
+  onCallStaff,
+  staffCalled,
 }) {
   return (
     <header className="app-header">
@@ -16,25 +18,34 @@ function Header({
           {t.table} {table}
         </h2>
 
-        <div className="language-switcher">
-          <button onClick={() => setLanguage("de")} className="lang-btn">
-            🇩🇪
-          </button>
+<div className="language-switcher">
+  <button onClick={() => setLanguage("de")} className="lang-btn">
+    DE
+  </button>
 
-          <button onClick={() => setLanguage("en")} className="lang-btn">
-            EN
-          </button>
+  <button onClick={() => setLanguage("en")} className="lang-btn">
+    EN
+  </button>
 
-          <button onClick={() => setLanguage("ar")} className="lang-btn">
-            AR
-          </button>
-        </div>
+  <button onClick={() => setLanguage("ar")} className="lang-btn">
+    AR
+  </button>
+</div>
+
+<div className="staff-call-wrapper">
+  <button className="staff-call-button" onClick={onCallStaff}>
+    🛎️ {t.callStaff}
+  </button>
+
+  {staffCalled && (
+    <p className="staff-call-message">
+      {t.staffCalled}
+    </p>
+  )}
+</div>
       </div>
 
-      <button
-        onClick={onOpenCart}
-        className="cart-floating-button"
-      >
+      <button onClick={onOpenCart} className="cart-floating-button">
         <FiShoppingCart size={20} />
         <span>{cartItemsCount}</span>
       </button>

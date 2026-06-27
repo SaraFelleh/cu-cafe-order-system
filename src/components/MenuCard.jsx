@@ -78,7 +78,7 @@ function MenuCard({
                     className={`option-btn ${
                       isExtraSelected(extra.id) ? "selected" : ""
                     }`}
-                    onClick={() => onSelectExtra(itemKey, extra)}
+                    onClick={() => onSelectExtra(itemKey, extra, item)}
                   >
                     {extra.name?.[language] || extra.name}
                     {extra.price > 0 && (
