@@ -94,6 +94,10 @@ function selectExtra(itemKey, extra) {
 
 function addToCart(item, itemKey) {
   const selectedSize = selectedSizes[itemKey];
+    if (item.sizes && !selectedSize) {
+    alert(t.selectSizeRequired);
+    return;
+  }
   const selectedExtras = selectedOptions[itemKey] || [];
   const finalPrice = getItemFinalPrice(item, itemKey);
 
