@@ -217,58 +217,82 @@ try {
       alert(t.orderError)
     }
   }
-
 return (
   <div dir={language === "ar" ? "rtl" : "ltr"}>
-<Header
-  t={t}
-  table={table}
-  cartItemsCount={cartItemsCount}
-  setLanguage={setLanguage}
-  onOpenCart={() => setIsCartOpen(true)}
-/>
-      <img
-        src="/images/coffee-menu.png"
-        alt="Coffee menu"
-        className="hero-image"
-      />
+    <Header
+      t={t}
+      table={table}
+      cartItemsCount={cartItemsCount}
+      setLanguage={setLanguage}
+      onOpenCart={() => setIsCartOpen(true)}
+    />
 
-      <div className="menu-container">
-        {menu.map((category) => (
-          <section className="category-section" key={category.category}>
-            <img
-              src={category.image}
-              alt={category.category}
-              className="category-image"
-            />
+    <div className="category-nav">
+      {menu.map((category) => (
+        <button
+          key={category.category}
+          className="category-nav-btn"
+          onClick={() =>
+            document
+              .getElementById(category.category.replace(/\s+/g, "-"))
+              ?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              })
+          }
+        >
+          {category.icon} {t[category.category] || category.category}
+        </button>
+      ))}
+    </div>
 
-            <h2 className="category-title">
-              {category.icon} {t[category.category] || category.category}
-            </h2>
+    <img
+      src="/images/coffee-menu.png"
+      alt="Coffee menu"
+      className="hero-image"
+    />
 
-            {category.description && (
-              <div className="category-description">
-                <p>
-                  {typeof category.description === "string"
-                    ? category.description
-                    : Array.isArray(category.description)
-                    ? category.description.join(" ")
-                    : category.description[language]}
-                </p>
-              </div>
-            )}
+    <div className="menu-container">
+      {menu.map((category) => (
+        <section
+          id={category.category.replace(/\s+/g, "-")}
+          className="category-section"
+          key={category.category}
+        >
+          <img
+            src={category.image}
+            alt={category.category}
+            className="category-image"
+          />
 
-            {category.notes && (
-              <div className="category-notes">
-                {(Array.isArray(category.notes)
-                  ? category.notes
-                  : category.notes[language] || []
-                ).map((line, index) => (
-                  <p key={index}>* {line}</p>
-                ))}
-              </div>
-            )}
+          <h2 className="category-title">
+            {category.icon} {t[category.category] || category.category}
+          </h2>
 
+          {category.description && (
+            <div className="category-description">
+              <p>
+                {typeof category.description === "string"
+                  ? category.description
+                  : Array.isArray(category.description)
+                  ? category.description.join(" ")
+                  : category.description[language]}
+              </p>
+            </div>
+          )}
+
+          {category.notes && (
+            <div className="category-notes">
+              {(Array.isArray(category.notes)
+                ? category.notes
+                : category.notes[language] || []
+              ).map((line, index) => (
+                <p key={index}>* {line}</p>
+              ))}
+            </div>
+          )}
+
+          
 <div className="menu-grid">
   {category.items.map((item) => {
     const itemKey = `${category.category}-${item.id}`;
