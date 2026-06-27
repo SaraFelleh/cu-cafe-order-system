@@ -103,11 +103,18 @@ function selectExtra(itemKey, extra, item) {
 
 function addToCart(item, itemKey) {
   const selectedSize = selectedSizes[itemKey];
-    if (item.sizes && !selectedSize) {
+
+  if (item.sizes && !selectedSize) {
     alert(t.selectSizeRequired);
     return;
   }
+
   const selectedExtras = selectedOptions[itemKey] || [];
+
+  if (item.extras && item.multipleExtras === false && selectedExtras.length === 0) {
+    alert(t.selectMilkRequired);
+    return;
+  }
   const finalPrice = getItemFinalPrice(item, itemKey);
 
   const extrasKey =
