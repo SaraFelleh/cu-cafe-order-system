@@ -29,6 +29,9 @@ function App() {
   const [openOptions, setOpenOptions] = useState({});
   const [authLoading, setAuthLoading] = useState(true);
   const [language, setLanguage] = useState("de");
+  const [sessionClosed, setSessionClosed] = useState(
+  sessionStorage.getItem("orderSessionClosed") === "true"
+  );
   const [staffCalled, setStaffCalled] = useState(false);
   const [orderNote, setOrderNote] = useState("");
   const t = translations[language];
@@ -41,6 +44,23 @@ function App() {
 
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+  if (path === "/cashier") return;
+
+  window.history.pushState(null, "", window.location.href);
+
+  const handleBackButton = () => {
+    sessionStorage.setItem("orderSessionClosed", "true");
+    setSessionClosed(true);
+  };
+
+  window.addEventListener("popstate", handleBackButton);
+
+  return () => {
+    window.removeEventListener("popstate", handleBackButton);
+  };
+}, [path]);
 
   const table =
     new URLSearchParams(window.location.search).get("table") || "Unknown";
@@ -226,6 +246,9 @@ try {
       console.log(order);
       await addDoc(collection(db, "orders"), order);
 
+      sessionStorage.setItem("orderSessionClosed", "true");
+      setSessionClosed(true);
+
       setShowSuccess(true);
       setCart([]);
       setOrderNote("");
@@ -255,6 +278,15 @@ try {
   }
 }
 
+if (sessionClosed && path !== "/cashier") {
+  return (
+    <div className="closed-page">
+      <h1>Cu Café</h1>
+      <p>Ihre Bestellung wurde erfolgreich gesendet.</p>
+      <p>Bitte scannen Sie den QR-Code erneut.</p>
+    </div>
+  );
+}
 
 return (
   <div dir={language === "ar" ? "rtl" : "ltr"}>
