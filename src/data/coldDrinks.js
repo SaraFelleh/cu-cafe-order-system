@@ -118,6 +118,7 @@ const coldDrinks = [
         },
         price: 2.7,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: waterTypes,
       },
 
@@ -135,6 +136,7 @@ const coldDrinks = [
         },
         price: 3.3,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: fritzColaTypes,
       },
 
@@ -152,6 +154,7 @@ const coldDrinks = [
         },
         price: 3.3,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: fritzLemoTypes,
       },
 
@@ -169,6 +172,7 @@ const coldDrinks = [
         },
         price: 3.4,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: schorleTypes,
       },
 
@@ -186,6 +190,7 @@ const coldDrinks = [
         },
         price: 3.5,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: icedTeaTypes,
       },
 
@@ -218,6 +223,7 @@ const coldDrinks = [
         },
         price: 4.2,
         optionLabel: drinkTypeLabel,
+        multipleExtras: false,
         extras: juiceTypes,
       },
     ],

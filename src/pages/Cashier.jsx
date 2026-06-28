@@ -27,24 +27,24 @@ function Cashier() {
     audio.volume = 1;
 
     audio.play().catch((err) => {
-      console.log("Sound blocked:", err);
+      console.error(err);
     });
   }
 
   function playStaffCallSound() {
-  if (!soundEnabled) return;
+    if (!soundEnabled) return;
 
-  const audio = new Audio("/staff-call.wav");
-  audio.volume = 1;
+    const audio = new Audio("/staff-call.wav");
+    audio.volume = 1;
 
-  audio.play().catch((err) => {
-    console.log("Staff sound blocked:", err);
-  });
-}
+    audio.play().catch((err) => {
+      console.error(err);
+    });
+  }
 
   function renderOrderItems(items) {
     return items?.map((item, index) => (
-      <div key={index} className="cashier-order-item">
+      <div key={`${item.id || item.menuItemKey}-${index}`} className="cashier-order-item">
         <p>
           {item.quantity ? `${item.quantity}× ` : ""}
           {getText(item.name)} - {Number(item.price || 0).toFixed(2)}€
@@ -67,6 +67,26 @@ function Cashier() {
     ));
   }
 
+  function renderOrderNote(note) {
+    if (typeof note !== "string" || note.trim() === "") return null;
+
+    return (
+      <div
+        style={{
+          marginTop: "15px",
+          marginBottom: "15px",
+          padding: "12px",
+          background: "#fff3c4",
+          color: "#111",
+          borderRadius: "10px",
+          fontWeight: "bold",
+        }}
+      >
+        📝 Note: {note}
+      </div>
+    );
+  }
+
   useEffect(() => {
     const unsubscribe = onSnapshot(collection(db, "orders"), (snapshot) => {
       const ordersData = snapshot.docs.map((document) => ({
@@ -80,7 +100,17 @@ function Cashier() {
         done: 3,
       };
 
-      ordersData.sort((a, b) => statusOrder[a.status] - statusOrder[b.status]);
+      ordersData.sort((a, b) => {
+        const statusDiff =
+          (statusOrder[a.status] || 99) - (statusOrder[b.status] || 99);
+
+        if (statusDiff !== 0) return statusDiff;
+
+        const timeA = a.createdAt?.toMillis ? a.createdAt.toMillis() : 0;
+        const timeB = b.createdAt?.toMillis ? b.createdAt.toMillis() : 0;
+
+        return timeA - timeB;
+      });
 
       const newOrdersCount = ordersData.filter(
         (order) => order.status === "new"
@@ -116,12 +146,12 @@ function Cashier() {
         return timeB - timeA;
       });
 
-if (
-  !firstStaffCallsLoad.current &&
-  activeCalls.length > previousStaffCallsCount.current
-) {
-  playStaffCallSound();
-}
+      if (
+        !firstStaffCallsLoad.current &&
+        activeCalls.length > previousStaffCallsCount.current
+      ) {
+        playStaffCallSound();
+      }
 
       firstStaffCallsLoad.current = false;
       previousStaffCallsCount.current = activeCalls.length;
@@ -131,29 +161,32 @@ if (
     return () => unsubscribe();
   }, [soundEnabled]);
 
-  async function updateStatus(orderId, status) {
+async function updateStatus(orderId, status) {
+  try {
+    const currentOrder = orders.find((order) => order.id === orderId);
+
     await updateDoc(doc(db, "orders", orderId), {
       status: status,
+      note: currentOrder?.note || "",
     });
+  } catch (error) {
+    console.error(error);
+    alert("Could not update order status");
   }
+}
 
   async function updateStaffCallStatus(callId, status) {
-    await updateDoc(doc(db, "staffCalls", callId), {
-      status: status,
-    });
+    try {
+      await updateDoc(doc(db, "staffCalls", callId), {
+        status: status,
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Could not update staff call");
+    }
   }
 
-  const visibleOrders = orders.filter((order) => order.status !== "done");
-  const doneOrders = orders.filter((order) => order.status === "done");
-
-  return (
-    <div className="cashier-page">
-      <h1>Cu Café - Cashier</h1>
-
-      <button onClick={() => signOut(auth)}>Logout</button>
-
-<button
-  onClick={async () => {
+  async function enableSound() {
     try {
       const orderAudio = new Audio("/notification.wav");
       orderAudio.volume = 1;
@@ -166,14 +199,25 @@ if (
       setSoundEnabled(true);
       alert("Sound enabled");
     } catch (err) {
-      console.log(err);
+      console.error(err);
       alert("Sound could not be enabled");
     }
-  }}
-  style={{ marginLeft: "10px" }}
->
-  🔔 Enable Sound
-</button>
+  }
+
+  const visibleOrders = orders.filter((order) => order.status !== "done");
+  const doneOrders = orders.filter((order) => order.status === "done");
+
+  return (
+    <div className="cashier-page">
+      <h1>Cu Café - Cashier</h1>
+
+      <button onClick={() => signOut(auth)}>Logout</button>
+
+      {!soundEnabled && (
+        <button onClick={enableSound} style={{ marginLeft: "10px" }}>
+          🔔 Enable Sound
+        </button>
+      )}
 
       {staffCalls.length > 0 && (
         <>
@@ -236,12 +280,8 @@ if (
               </p>
 
               <div className="order-items">{renderOrderItems(order.items)}</div>
-              {order.note && (
-                 <div className="order-note-box">
-                 <strong>📝 Note</strong>
-                 <p>{order.note}</p>
-                 </div>
-              )}
+
+              {renderOrderNote(order.note)}
 
               <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
 
@@ -299,7 +339,28 @@ if (
 
                   <div className="order-items">
                     {renderOrderItems(order.items)}
+
                   </div>
+                  {order.note && (
+                   <div
+                       style={{
+                         marginTop: "20px",
+                         marginBottom: "20px",
+                         padding: "18px",
+                         backgroundColor: "#fff3c4",
+                         color: "#111",
+                         borderRadius: "12px",
+                         fontWeight: "bold",
+                         fontSize: "18px",
+                         minHeight: "60px",
+                       }}
+  >
+    📝 Note
+    <p style={{ marginTop: "10px", marginBottom: 0 }}>
+      {order.note}
+    </p>
+  </div>
+)}
 
                   <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
                 </div>

@@ -49,7 +49,6 @@ const coffee = [
         },
         price: 4.9,
       },
-
       {
         id: 2,
         name: {
@@ -59,7 +58,6 @@ const coffee = [
         },
         price: 2.9,
       },
-
       {
         id: 3,
         name: {
@@ -69,7 +67,6 @@ const coffee = [
         },
         price: 3.5,
       },
-
       {
         id: 4,
         name: {
@@ -80,7 +77,6 @@ const coffee = [
         priceText: "2,50€ / 3,40€",
         price: 2.5,
       },
-
       {
         id: 5,
         name: {
@@ -90,7 +86,6 @@ const coffee = [
         },
         price: 2.6,
       },
-
       {
         id: 6,
         name: {
@@ -100,7 +95,6 @@ const coffee = [
         },
         price: 3.9,
       },
-
       {
         id: 7,
         name: {
@@ -119,10 +113,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 8,
         name: {
@@ -136,10 +130,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 9,
         name: {
@@ -153,10 +147,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 10,
         name: {
@@ -170,10 +164,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 11,
         name: {
@@ -187,10 +181,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 12,
         name: {
@@ -204,10 +198,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 13,
         name: {
@@ -221,10 +215,10 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },
-
       {
         id: 14,
         name: {
@@ -238,6 +232,7 @@ const coffee = [
           en: "Milk",
           ar: "الحليب",
         },
+        optionType: "milk",
         multipleExtras: false,
         extras: milkOptions,
       },

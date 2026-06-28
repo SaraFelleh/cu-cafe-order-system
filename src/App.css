@@ -48,6 +48,24 @@ button:hover {
    Header / Logo / Language
 ========================= */
 
+.app-header {
+  position: sticky;
+  top: 0;
+  background: var(--bg-main);
+  padding: 18px 20px;
+  z-index: 100;
+  border-bottom: 1px solid var(--border-soft);
+  overflow: visible;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  overflow: visible;
+}
+
 .logo-title {
   margin: 0;
   font-size: 64px;
@@ -55,7 +73,6 @@ button:hover {
   line-height: 1;
   letter-spacing: 1px;
   white-space: nowrap;
-
   background: linear-gradient(
     180deg,
     #fff2d5 0%,
@@ -64,10 +81,24 @@ button:hover {
     #8f5728 70%,
     #f4d18c 100%
   );
-
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 4px rgba(184, 115, 51, 0.12);
+}
+
+.table-title {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--text-white);
+}
+
+.language-switcher {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: center;
+  align-items: center;
 }
 
 .lang-btn {
@@ -88,42 +119,6 @@ button:hover {
   color: var(--bg-main);
 }
 
-/* Classes used after splitting App.jsx into components */
-
-.app-header {
-  position: sticky;
-  top: 0;
-  background: var(--bg-main);
-  padding: 18px 20px;
-  z-index: 100;
-  border-bottom: 1px solid var(--border-soft);
-  overflow: visible;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  overflow: visible;
-}
-
-.table-title {
-  margin: 0;
-  font-size: 26px;
-  line-height: 1;
-  color: var(--text-white);
-}
-
-.language-switcher {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  justify-content: center;
-  align-items: center;
-}
-
-
 .cart-floating-button {
   position: fixed;
   top: 25px;
@@ -136,17 +131,17 @@ button:hover {
   color: var(--gold-light);
   font-size: 20px;
   font-weight: bold;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
 /* =========================
-   Hero / Menu layout
+   Menu layout
 ========================= */
 
 .hero-image {
@@ -198,6 +193,35 @@ button:hover {
   margin-bottom: 6px;
 }
 
+.category-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 0 auto 35px;
+  padding: 0 20px;
+}
+
+.category-nav-inside {
+  margin: -25px auto 25px;
+}
+
+.category-nav-btn {
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gold);
+  padding: 10px 16px;
+  font-weight: bold;
+}
+
+.category-nav-btn:hover,
+.category-nav-btn.active {
+  background: var(--gold);
+  color: var(--bg-main);
+}
+
 .staff-call-box {
   text-align: center;
   margin: 18px auto;
@@ -214,7 +238,6 @@ button:hover {
   max-width: 180px;
 }
 
-
 .staff-call-button:hover {
   background: var(--gold);
   color: var(--bg-main);
@@ -226,8 +249,6 @@ button:hover {
   font-weight: bold;
 }
 
-
-
 /* =========================
    Menu cards
 ========================= */
@@ -237,7 +258,6 @@ button:hover {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
 }
-
 
 .menu-card {
   min-height: 240px;
@@ -290,9 +310,9 @@ button:hover {
 ========================= */
 
 .add-button {
-  padding: 10px 18px;
-  margin-top: 16px;
   width: 100%;
+  margin-top: 16px;
+  padding: 10px 18px;
   border: none;
   border-radius: 999px;
   background: var(--gold);
@@ -381,18 +401,7 @@ button:hover {
 .quantity-controls button {
   width: 36px;
   height: 36px;
-  border: none;
-  border-radius: 50%;
-  background: #d7b56d;
-  color: #15161d;
   font-size: 22px;
-  font-weight: bold;
-}
-
-
-.cart-quantity .quantity-controls {
-  margin-top: 10px;
-  transform: scale(0.85);
 }
 
 .quantity-controls span {
@@ -409,104 +418,9 @@ button:hover {
   font-size: 20px;
 }
 
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 400px;
-  max-width: 95%;
-  height: 100vh;
-  background: #1f212b;
-  color: white;
-  padding: 30px;
-  z-index: 200;
-  overflow-y: auto;
-  box-shadow: -8px 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.close-cart-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 26px;
-}
-
-.cart-title {
-  color: #e0be6d;
-  text-align: center;
-}
-
-.cart-table {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 20px;
-  color: #f2c97d;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.cart-item-detail {
-  color: #aaa;
-  font-size: 14px;
-}
-
 .cart-quantity .quantity-controls {
   margin-top: 10px;
   transform: scale(0.85);
-}
-
-.success-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-.success-box {
-  background: #20212b;
-  border: 2px solid #e0be6d;
-  border-radius: 22px;
-  padding: 35px;
-  width: 390px;
-  max-width: 90%;
-  text-align: center;
-  color: white;
-}
-
-.success-icon {
-  width: 70px;
-  height: 70px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background: #e0be6d;
-  color: #15161d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  font-weight: bold;
-}
-
-.success-title {
-  color: #e0be6d;
-  margin-bottom: 20px;
-}
-
-.success-text {
-  line-height: 1.8;
-  font-size: 17px;
-}
-
-.success-button {
-  margin-top: 25px;
 }
 
 /* =========================
@@ -536,6 +450,7 @@ button:hover {
   background: transparent;
   color: var(--text-white);
   font-size: 26px;
+  cursor: pointer;
 }
 
 .cart-title {
@@ -560,6 +475,19 @@ button:hover {
 .cart-item-detail {
   color: var(--text-muted);
   font-size: 14px;
+}
+
+.order-note {
+  width: 100%;
+  min-height: 80px;
+  margin: 18px 0;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #555;
+  background: #2b2b35;
+  color: var(--text-white);
+  resize: vertical;
+  font-size: 15px;
 }
 
 .send-order-button {
@@ -624,6 +552,88 @@ button:hover {
   line-height: 1.8;
 }
 
+.success-button {
+  margin-top: 25px;
+}
+
+/* =========================
+   Closed / Order completed page
+========================= */
+
+.closed-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #16171f;
+  color: var(--text-white);
+  padding: 24px;
+  text-align: center;
+}
+
+.closed-page-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 40px 35px;
+  background: var(--bg-card);
+  border: 1px solid rgba(224, 190, 109, 0.25);
+  border-radius: 26px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+}
+
+.check {
+  width: 82px;
+  height: 82px;
+  border: 3px solid #58c472;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #58c472;
+  font-size: 48px;
+  margin: 0 auto 18px;
+}
+
+.closed-page .check {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: #4caf50;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  box-shadow: 0 10px 25px rgba(76, 175, 80, 0.35);
+}
+
+.closed-page h1 {
+  font-size: 44px;
+  color: var(--gold-light);
+  margin-bottom: 22px;
+}
+
+.closed-page p {
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 10px 0;
+}
+
+.closed-page .thanks {
+  margin-top: 34px;
+  color: var(--gold-light);
+  font-size: 19px;
+}
+
+.close-info{
+    margin-top:18px;
+    font-size:15px;
+    color:#9aa3b2;
+}
+
+
 /* =========================
    Cashier page
 ========================= */
@@ -687,6 +697,14 @@ button:hover {
 
 .order-items {
   margin: 15px 0;
+}
+
+.order-note-box {
+  margin: 15px 0;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff3c4;
+  color: #222;
 }
 
 .order-actions {
@@ -765,170 +783,6 @@ button:hover {
   text-align: left;
 }
 
-
-.app-header {
-  position: sticky;
-  top: 0;
-  background: #15161d;
-  padding: 18px 20px;
-  z-index: 100;
-  border-bottom: 1px solid #333;
-  overflow: visible;
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  overflow: visible;
-}
-
-.table-title {
-  margin: 0;
-  font-size: 26px;
-  line-height: 1;
-  color: #fff;
-}
-
-
-.cart-floating-button {
-  position: fixed;
-  top: 25px;
-  right: 18px;
-  width: 48px;
-  height: 48px;
-  border-radius: 18px;
-  border: 2px solid #E0BE6D;
-  background: #1f212b;
-  color: #E0BE6D;
-  font-size: 20px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  z-index: 1000;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-}
-
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 400px;
-  max-width: 95%;
-  height: 100vh;
-  background: #1f212b;
-  color: white;
-  padding: 30px;
-  z-index: 200;
-  overflow-y: auto;
-  box-shadow: -8px 0 20px rgba(0, 0, 0, 0.4);
-}
-
-.close-cart-button {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-.category-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  max-width: 1100px;
-  margin: 0 auto 35px;
-  padding: 0 20px;
-}
-
-.category-nav-btn {
-  border: 1px solid var(--gold);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--gold);
-  padding: 10px 16px;
-  font-weight: bold;
-}
-
-.category-nav-btn:hover {
-  background: var(--gold);
-  color: var(--bg-main);
-}
-
-
-.order-note {
-  width: 100%;
-  min-height: 80px;
-  margin: 18px 0;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #555;
-  background: #2b2b35;
-  color: white;
-  resize: vertical;
-  font-size: 15px;
-}
-
-.order-note-box {
-  margin: 15px 0;
-  padding: 12px;
-  border-radius: 12px;
-  background: #fff3c4;
-  color: #222;
-}
-
-.category-nav-inside {
-  margin: -25px auto 25px;
-}
-
-.category-nav-btn.active {
-  background: var(--gold);
-  color: var(--bg-main);
-}
-
-
-.closed-page{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:#16171f;
-    color:white;
-    padding:30px;
-}
-
-.closed-page h1{
-    font-size:70px;
-    color:#e0be6d;
-    margin-bottom:20px;
-}
-
-.closed-page .check{
-    font-size:80px;
-    margin-bottom:15px;
-}
-
-.closed-page p{
-    font-size:24px;
-    margin:8px 0;
-}
-
-.closed-page .thanks{
-    margin-top:35px;
-    color:#e0be6d;
-    font-size:20px;
-}
-
 /* =========================
    Responsive
 ========================= */
@@ -979,5 +833,23 @@ button:hover {
 
   .menu-grid {
     grid-template-columns: 1fr;
+  }
+
+  .closed-page-card {
+    padding: 38px 24px;
+  }
+
+  .closed-page .check {
+    width: 72px;
+    height: 72px;
+    font-size: 38px;
+  }
+
+  .closed-page h1 {
+    font-size: 36px;
+  }
+
+  .closed-page p {
+    font-size: 18px;
   }
 }

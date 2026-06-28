@@ -1,5 +1,10 @@
 const shakshukaExtras = [
   {
+    id: "egg",
+    name: { de: "Ei", en: "Egg", ar: "بيضة" },
+    price: 2,
+  },
+  {
     id: "jalapenos",
     name: { de: "Jalapeños", en: "Jalapeños", ar: "هالبينو" },
     price: 2,
@@ -34,11 +39,27 @@ const scrambledEggExtras = [
   },
 ];
 
+const magicLampExtras = [
+  {
+    id: "vegetarian",
+    name: {
+      de: "Vegetarisch",
+      en: "Vegetarian",
+      ar: "نباتي",
+    },
+    price: 0,
+  },
+];
+
 const proteifullExtras = [
   {
-    id: "extra-salmon",
-    name: { de: "Nur Lachs", en: "Only Salmon", ar: "إضافة سلمون فقط" },
-    price: 1,
+    id: "avocado-only",
+    name: {
+      de: "Nur Avocado",
+      en: "Only Avocado",
+      ar: "أفوكادو فقط",
+    },
+    price: 0,
   },
 ];
 
@@ -64,14 +85,14 @@ const breakfast = [
       {
         id: 38,
         name: {
-          de: "Shakshuka",
-          en: "Shakshuka",
-          ar: "شكشوكة",
+          de: "Shakshuka Vegan",
+          en: "Vegan Shakshuka",
+          ar: "شكشوكة نباتية",
         },
         subtitle: {
-          de: "Bio-Eier, Tomaten, Zwiebel und Paprika in der Pfanne.",
-          en: "Organic eggs, tomatoes, onions and peppers.",
-          ar: "بيض عضوي مع الطماطم والبصل والفليفلة.",
+          de: "Tomaten, Zwiebel und Paprika in der Pfanne. Vegan. Ei optional +2,00€.",
+          en: "Tomatoes, onions and peppers. Vegan. Egg optional +2.00€.",
+          ar: "طماطم وبصل وفليفلة في المقلاة. نباتية، ويمكن إضافة بيضة مقابل 2.00€.",
         },
         price: 12.9,
         optionLabel: breakfastExtraLabel,
@@ -108,6 +129,8 @@ const breakfast = [
           ar: "زيتون، مربى الورد، مكدوس، جبنة، فلافل، حمص وسجق مع البيض. يتوفر أيضاً بدون سجق (نباتي).",
         },
         price: 15.9,
+        optionLabel: breakfastExtraLabel,
+        extras: magicLampExtras,
       },
 
       {
@@ -118,9 +141,9 @@ const breakfast = [
           ar: "بروتيفول",
         },
         subtitle: {
-          de: "Lachs und Avocado auf Bio-Spiegeleiern mit Roggenbrot, Kräuterfrischkäse, Gouda und Salat.",
-          en: "Salmon and avocado on organic fried eggs with rye bread, herb cream cheese, Gouda and salad.",
-          ar: "سلمون وأفوكادو مع بيض مقلي عضوي، خبز الجاودار، جبنة كريمية بالأعشاب، غودا وسلطة.",
+          de: "Lachs und Avocado auf Bio-Spiegeleiern mit Roggenbrot, Kräuterfrischkäse, Gouda und Salat. Auch nur mit Avocado möglich.",
+          en: "Salmon and avocado on organic fried eggs with rye bread, herb cream cheese, Gouda and salad. Also available with avocado only.",
+          ar: "سلمون وأفوكادو مع بيض مقلي عضوي، خبز الجاودار، جبنة كريمية بالأعشاب، غودا وسلطة. يمكن اختياره بأفوكادو فقط.",
         },
         price: 14.9,
         optionLabel: breakfastExtraLabel,

@@ -2,14 +2,12 @@ import { translations } from "./data/translations";
 import CartDrawer from "./components/CartDrawer";
 import MenuCard from "./components/MenuCard";
 import Header from "./components/Header";
-import SuccessModal from "./components/SuccessModal";
 import { useEffect, useState } from "react";
 import { menu } from "./data/menu";
 import {
   collection,
   addDoc,
   doc,
-  updateDoc,
   serverTimestamp,
   runTransaction,
 } from "firebase/firestore";
@@ -105,6 +103,15 @@ function selectExtra(itemKey, extra, item) {
     return basePrice + extraPrice;
   }
 
+function areExtrasEqual(extrasA = [], extrasB = []) {
+  const idsA = extrasA.map((extra) => extra.id).sort();
+  const idsB = extrasB.map((extra) => extra.id).sort();
+
+  if (idsA.length !== idsB.length) return false;
+
+  return idsA.every((id, index) => id === idsB[index]);
+}
+
 function addToCart(item, itemKey) {
   const selectedSize = selectedSizes[itemKey];
 
@@ -115,10 +122,15 @@ function addToCart(item, itemKey) {
 
   const selectedExtras = selectedOptions[itemKey] || [];
 
-  if (item.extras && item.multipleExtras === false && selectedExtras.length === 0) {
+if (item.extras && item.multipleExtras === false && selectedExtras.length === 0) {
+  if (item.optionType === "milk") {
     alert(t.selectMilkRequired);
-    return;
+  } else {
+    alert(t.selectOptionRequired);
   }
+  return;
+}
+
   const finalPrice = getItemFinalPrice(item, itemKey);
 
   const extrasKey =
@@ -215,8 +227,7 @@ try {
 
     return 1;
   });
-      console.log("Cart before sending:", cart);
-      console.log("Total before sending:", total);
+
       const order = {
        orderNumber: String(orderNumber).padStart(3, "0"),
        table: table,
@@ -227,7 +238,6 @@ try {
        createdAt: serverTimestamp(),
       };
 
-      console.log(order);
       await addDoc(collection(db, "orders"), order);
 
       sessionStorage.setItem("orderSessionClosed", "true");
@@ -264,24 +274,27 @@ try {
 
 if (sessionClosed && path !== "/cashier") {
   return (
-      <div className="closed-page">
-       <div className="check">✅</div>
+    <div className="closed-page" dir={language === "ar" ? "rtl" : "ltr"}>
+      <div className="closed-page-card">
+        <h1>{t.orderClosedTitle}</h1>
 
-        <h1>Cu Café</h1>
+        <p>{t.orderClosedMessage}</p>
 
-         <p>Ihre Bestellung wurde erfolgreich gesendet.</p>
+        <p>
+          {t.orderClosedAgain}
+          <br />
+          {t.orderClosedScan}
+        </p>
 
-         <p>
-            Für eine neue Bestellung
-         <br />
-            scannen Sie bitte den QR-Code erneut.
-         </p>
+        <div className="thanks">
+          {t.orderClosedThanks}
+        </div>
 
-      <div className="thanks">
-           Vielen Dank für Ihren Besuch ☕
+        <p className="close-info">
+          {t.orderClosedSeeYou}
+        </p>
       </div>
-   </div>
-
+    </div>
   );
 }
 
@@ -391,8 +404,7 @@ return (
       (cartItem) =>
         cartItem.menuItemKey === itemKey &&
         cartItem.selectedSize?.id === selectedSize?.id &&
-        JSON.stringify(cartItem.selectedExtras?.map((extra) => extra.id).sort() || []) ===
-        JSON.stringify(selectedExtras.map((extra) => extra.id).sort())
+        areExtrasEqual(cartItem.selectedExtras, selectedExtras)
     );
 
     return (
@@ -448,12 +460,6 @@ return (
   />
 )}
 
-{showSuccess && (
-  <SuccessModal
-    onClose={() => setShowSuccess(false)}
-    language={language}
-  />
-)}
 
     </div>
   );
