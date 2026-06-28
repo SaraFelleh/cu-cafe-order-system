@@ -35,7 +35,10 @@ function App() {
   const [staffCalled, setStaffCalled] = useState(false);
   const [orderNote, setOrderNote] = useState("");
   const t = translations[language];
+  const table =
+    new URLSearchParams(window.location.search).get("table") || "Unknown";
 
+  const path = window.location.pathname;
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -45,27 +48,8 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-  if (path === "/cashier") return;
 
-  window.history.pushState(null, "", window.location.href);
 
-  const handleBackButton = () => {
-    sessionStorage.setItem("orderSessionClosed", "true");
-    setSessionClosed(true);
-  };
-
-  window.addEventListener("popstate", handleBackButton);
-
-  return () => {
-    window.removeEventListener("popstate", handleBackButton);
-  };
-}, [path]);
-
-  const table =
-    new URLSearchParams(window.location.search).get("table") || "Unknown";
-
-  const path = window.location.pathname;
 
   if (path === "/cashier") {
     if (authLoading) {
