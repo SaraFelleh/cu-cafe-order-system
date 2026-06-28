@@ -264,11 +264,24 @@ try {
 
 if (sessionClosed && path !== "/cashier") {
   return (
-    <div className="closed-page">
-      <h1>Cu Café</h1>
-      <p>Ihre Bestellung wurde erfolgreich gesendet.</p>
-      <p>Bitte scannen Sie den QR-Code erneut.</p>
-    </div>
+      <div className="closed-page">
+       <div className="check">✅</div>
+
+        <h1>Cu Café</h1>
+
+         <p>Ihre Bestellung wurde erfolgreich gesendet.</p>
+
+         <p>
+            Für eine neue Bestellung
+         <br />
+            scannen Sie bitte den QR-Code erneut.
+         </p>
+
+      <div className="thanks">
+           Vielen Dank für Ihren Besuch ☕
+      </div>
+   </div>
+
   );
 }
 

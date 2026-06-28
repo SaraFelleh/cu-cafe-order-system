@@ -894,6 +894,41 @@ button:hover {
   color: var(--bg-main);
 }
 
+
+.closed-page{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    background:#16171f;
+    color:white;
+    padding:30px;
+}
+
+.closed-page h1{
+    font-size:70px;
+    color:#e0be6d;
+    margin-bottom:20px;
+}
+
+.closed-page .check{
+    font-size:80px;
+    margin-bottom:15px;
+}
+
+.closed-page p{
+    font-size:24px;
+    margin:8px 0;
+}
+
+.closed-page .thanks{
+    margin-top:35px;
+    color:#e0be6d;
+    font-size:20px;
+}
+
 /* =========================
    Responsive
 ========================= */
