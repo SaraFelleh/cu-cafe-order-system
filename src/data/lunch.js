@@ -46,13 +46,8 @@ const levanteOptions = [
 
 const koshariOptions = [
   {
-    id: "without-onions",
-    name: { de: "Ohne Röstzwiebeln", en: "Without crispy onions", ar: "بدون بصل مقرمش" },
-    price: 0,
-  },
-  {
-    id: "extra-sauce",
-    name: { de: "Extra Tomatensoße", en: "Extra tomato sauce", ar: "صلصة طماطم إضافية" },
+    id: "mild",
+    name: { de: "Mild", en: "Mild", ar: "بدون حار" },
     price: 0,
   },
   {
@@ -276,6 +271,7 @@ const lunch = [
         },
         price: 9.9,
         optionLabel: lunchExtraLabel,
+        multipleExtras: false,
         extras: koshariOptions,
       },
     ],
