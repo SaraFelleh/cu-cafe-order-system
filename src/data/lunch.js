@@ -42,6 +42,11 @@ const levanteOptions = [
     name: { de: "Mild", en: "Mild", ar: "بدون حار" },
     price: 0,
   },
+    {
+    id: "spicy",
+    name: { de: "Scharf", en: "Spicy", ar: "حار" },
+    price: 0,
+  },
 ];
 
 const koshariOptions = [
@@ -224,6 +229,7 @@ const lunch = [
         },
         price: 9.9,
         optionLabel: lunchOptionLabel,
+        multipleExtras: false,
         extras: levanteOptions,
       },
 

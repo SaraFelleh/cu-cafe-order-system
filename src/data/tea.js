@@ -7,7 +7,7 @@ const tea = [
   {
     category: "Tea",
     icon: "🍵",
-    image: "/images/coffee-menu.png",
+    image: "/images/tee.png",
 
     description: {
       de: "Bitte wählen Sie Ihre Teesorte.",

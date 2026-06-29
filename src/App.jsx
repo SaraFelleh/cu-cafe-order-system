@@ -310,28 +310,6 @@ return (
   staffCalled={staffCalled}
 />
 
-
-
-    <div className="category-nav">
-      {menu.map((category) => (
-        <button
-          key={category.category}
-          className="category-nav-btn"
-          onClick={() =>
-            document
-              .getElementById(category.category.replace(/\s+/g, "-"))
-              ?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              })
-          }
-        >
-          {category.icon} {t[category.category] || category.category}
-        </button>
-      ))}
-    </div>
-
-
 <div className="menu-container">
   {menu.map((category) => (
     <section
