@@ -1,8 +1,8 @@
 const shakshukaExtras = [
   {
-    id: "egg",
-    name: { de: "Ei", en: "Egg", ar: "بيضة" },
-    price: 2,
+    id: "vegan",
+    name: { de: "Vegan", en: "Vegan", ar: "نباتي" },
+    price: 0,
   },
   {
     id: "jalapenos",
@@ -43,9 +43,9 @@ const magicLampExtras = [
   {
     id: "vegetarian",
     name: {
-      de: "Vegetarisch",
-      en: "Vegetarian",
-      ar: "نباتي",
+      de: "Vegetarisch ohne Sucuk",
+      en: "Vegetarian without Sucuk",
+      ar: "نباتي بدون سجق",
     },
     price: 0,
   },
@@ -60,6 +60,15 @@ const proteifullExtras = [
       ar: "أفوكادو فقط",
     },
     price: 0,
+  },
+  {
+    id: "salmon-only",
+    name: {
+      de: "Nur Lachs",
+      en: "Only Salmon",
+      ar: "سلمون فقط",
+    },
+    price: 1,
   },
 ];
 
@@ -85,14 +94,14 @@ const breakfast = [
       {
         id: 38,
         name: {
-          de: "Shakshuka Vegan",
-          en: "Vegan Shakshuka",
-          ar: "شكشوكة نباتية",
+          de: "Shakshuka",
+          en: "Shakshuka",
+          ar: "شكشوكة",
         },
         subtitle: {
-          de: "Tomaten, Zwiebel und Paprika in der Pfanne. Vegan. Ei optional +2,00€.",
-          en: "Tomatoes, onions and peppers. Vegan. Egg optional +2.00€.",
-          ar: "طماطم وبصل وفليفلة في المقلاة. نباتية، ويمكن إضافة بيضة مقابل 2.00€.",
+          de: "Bio-Eier, Tomaten, Zwiebel und Paprika in der Pfanne. Auch vegan möglich.",
+          en: "Organic eggs, tomatoes, onions and peppers in the pan. Also available vegan.",
+          ar: "بيض عضوي مع الطماطم والبصل والفليفلة في المقلاة. يمكن طلبها نباتية أيضاً.",
         },
         price: 12.9,
         optionLabel: breakfastExtraLabel,
@@ -124,9 +133,9 @@ const breakfast = [
           ar: "ماجيك لامب",
         },
         subtitle: {
-          de: "Oliven, Rosenmarmelade, Makdus, Käse, Falafel, Hummus und Sucuk mit Ei. Auch vegetarisch erhältlich.",
-          en: "Olives, rose jam, Makdus, cheese, falafel, hummus and sucuk with eggs. Vegetarian option available.",
-          ar: "زيتون، مربى الورد، مكدوس، جبنة، فلافل، حمص وسجق مع البيض. يتوفر أيضاً بدون سجق (نباتي).",
+          de: "Oliven, Rosenjam, Makdus, Käse, Falafel, Hummus und Sucuk mit Ei. Auch vegetarisch ohne Sucuk erhältlich.",
+          en: "Olives, rose jam, Makdus, cheese, falafel, hummus and sucuk with eggs. Also available vegetarian without sucuk.",
+          ar: "زيتون، مربى الورد، مكدوس، جبنة، فلافل، حمص وسجق مع البيض. يتوفر أيضاً نباتي بدون سجق.",
         },
         price: 15.9,
         optionLabel: breakfastExtraLabel,
@@ -141,12 +150,13 @@ const breakfast = [
           ar: "بروتيفول",
         },
         subtitle: {
-          de: "Lachs und Avocado auf Bio-Spiegeleiern mit Roggenbrot, Kräuterfrischkäse, Gouda und Salat. Auch nur mit Avocado möglich.",
-          en: "Salmon and avocado on organic fried eggs with rye bread, herb cream cheese, Gouda and salad. Also available with avocado only.",
-          ar: "سلمون وأفوكادو مع بيض مقلي عضوي، خبز الجاودار، جبنة كريمية بالأعشاب، غودا وسلطة. يمكن اختياره بأفوكادو فقط.",
+          de: "Lachs und Avocado auf 2 Bio-Spiegeleiern mit Roggenbrot, Kräuterfrischkäse, Gouda und Salat. Auch nur mit Avocado oder nur Lachs (+1,00€) möglich.",
+          en: "Salmon and avocado on 2 organic fried eggs with rye bread, herb cream cheese, Gouda and salad. Also available with only avocado or only salmon (+1.00€).",
+          ar: "سلمون وأفوكادو مع بيضتين مقليتين عضويتين، خبز الجاودار، جبنة كريمية بالأعشاب، غودا وسلطة. يمكن طلبه بأفوكادو فقط أو سلمون فقط (+1€).",
         },
         price: 14.9,
         optionLabel: breakfastExtraLabel,
+        multipleExtras: false,
         extras: proteifullExtras,
       },
 

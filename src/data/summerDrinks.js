@@ -1,5 +1,14 @@
 const summerMilkOptions = [
   {
+    id: "cow",
+    name: {
+      de: "Vollmilch",
+      en: "Cow Milk",
+      ar: "حليب كامل الدسم",
+    },
+    price: 0,
+  },
+  {
     id: "oat",
     name: {
       de: "Hafermilch",
@@ -16,6 +25,15 @@ const summerMilkOptions = [
       ar: "حليب الصويا",
     },
     price: 0,
+  },
+  {
+    id: "lactose-free",
+    name: {
+      de: "Laktosefreie Milch",
+      en: "Lactose-free Milk",
+      ar: "حليب خالٍ من اللاكتوز",
+    },
+    price: 0.3,
   },
 ];
 

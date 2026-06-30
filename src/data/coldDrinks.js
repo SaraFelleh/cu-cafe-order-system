@@ -213,15 +213,16 @@ const coldDrinks = [
         id: 23,
         name: {
           de: "Saft",
-          en: "Juice",
-          ar: "عصير",
+          en: "Fruit Juice",
+          ar: "عصير فواكه",
         },
+
         subtitle: {
           de: "Bitte wählen Sie eine Sorte.",
           en: "Please choose a flavor.",
           ar: "يرجى اختيار النكهة.",
         },
-        price: 4.2,
+        price: 4.1,
         optionLabel: drinkTypeLabel,
         multipleExtras: false,
         extras: juiceTypes,

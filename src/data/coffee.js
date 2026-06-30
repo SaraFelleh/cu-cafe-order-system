@@ -91,14 +91,22 @@ const coffee = [
       },
 
       {
-        id: 5,
-        name: {
-          de: "Espresso Macchiato",
-          en: "Espresso Macchiato",
-          ar: "إسبريسو ماكياتو",
-        },
-        price: 2.6,
+       id: 5,
+       name: {
+         de: "Espresso Macchiato",
+         en: "Espresso Macchiato",
+         ar: "إسبريسو ماكياتو",
+       },
+       price: 2.6,
+       optionLabel: {
+        de: "Milch",
+        en: "Milk",
+        ar: "الحليب",
       },
+      optionType: "milk",
+      multipleExtras: false,
+      extras: milkOptions,
+     },
 
       {
         id: 6,
@@ -108,6 +116,14 @@ const coffee = [
           ar: "إسبريسو أفوغاتو",
         },
         price: 3.9,
+        optionLabel: {
+          de: "Milch",
+          en: "Milk",
+          ar: "الحليب",
+        },
+        optionType: "milk",
+        multipleExtras: false,
+        extras: milkOptions,
       },
 
       {

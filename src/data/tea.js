@@ -1,6 +1,22 @@
 const teaSizes = [
-  { id: "cup", name: "Cup", price: 3.6 },
-  { id: "pot", name: "Pot", price: 5.2 },
+  {
+    id: "cup",
+    name: {
+      de: "Tasse",
+      en: "Cup",
+      ar: "كوب",
+    },
+    price: 3.6,
+  },
+  {
+    id: "pot",
+    name: {
+      de: "Kanne",
+      en: "Pot",
+      ar: "إبريق",
+    },
+    price: 5.2,
+  },
 ];
 
 const tea = [
@@ -20,35 +36,35 @@ const tea = [
         id: 15,
         name: { de: "Schwarz", en: "Black Tea", ar: "شاي أسود" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 16,
         name: { de: "Grün", en: "Green Tea", ar: "شاي أخضر" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 17,
         name: { de: "Früchte", en: "Fruit Tea", ar: "شاي فواكه" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 18,
         name: { de: "Kräuter", en: "Herbal Tea", ar: "شاي أعشاب" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 19,
         name: { de: "Minze", en: "Mint Tea", ar: "شاي نعناع" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
@@ -59,21 +75,21 @@ const tea = [
           ar: "شاي زنجبيل وليمون",
         },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 21,
         name: { de: "Elfenspuk", en: "Elfenspuk Tea", ar: "شاي إلفنسبوك" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
         id: 22,
         name: { de: "Honigwald", en: "Honey Forest Tea", ar: "شاي غابة العسل" },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
       {
@@ -84,7 +100,7 @@ const tea = [
           ar: "شاي رويبوس بالفانيليا",
         },
         price: 3.6,
-        priceText: "3.60€ / 5.20€",
+        priceText: "3,60€ / 5,20€",
         sizes: teaSizes,
       },
     ],

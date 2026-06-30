@@ -59,7 +59,7 @@ function MenuCard({
           {item.priceText
             ? item.priceText
             : item.price != null
-            ? `${item.price.toFixed(2)}€`
+            ? `${item.price.toFixed(2).replace(".", ",")}€`
             : t.askStaff}
         </span>
       </div>
@@ -79,8 +79,8 @@ function MenuCard({
                     }`}
                     onClick={() => onSelectSize(itemKey, size)}
                   >
-                    {size.name}
-                    <span>{size.price.toFixed(2)}€</span>
+                    {size.name?.[language] || size.name}
+                    <span>{size.price.toFixed(2).replace(".", ",")}€</span>
                   </button>
                 ))}
               </div>
@@ -104,7 +104,7 @@ function MenuCard({
                   >
                     {extra.name?.[language] || extra.name}
                     {extra.price > 0 && (
-                      <span>+{extra.price.toFixed(2)}€</span>
+                      <span>+{extra.price.toFixed(2).replace(".", ",")}€</span>
                     )}
                   </button>
                 ))}
@@ -114,7 +114,7 @@ function MenuCard({
 
           {(item.sizes || item.extras) && (
             <p className="final-price">
-              {t.total}: {getItemFinalPrice(item, itemKey).toFixed(2)}€
+              {t.total}: {getItemFinalPrice(item, itemKey).toFixed(2).replace(".", ",")}€
             </p>
           )}
         </>

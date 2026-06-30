@@ -1,5 +1,14 @@
 const smoothieMilkOptions = [
   {
+    id: "cow",
+    name: {
+      de: "Vollmilch",
+      en: "Cow Milk",
+      ar: "حليب كامل الدسم",
+    },
+    price: 0,
+  },
+  {
     id: "oat",
     name: {
       de: "Hafermilch",
@@ -16,6 +25,15 @@ const smoothieMilkOptions = [
       ar: "حليب الصويا",
     },
     price: 0,
+  },
+  {
+    id: "lactosefree",
+    name: {
+      de: "Laktosefreie Milch",
+      en: "Lactose-Free Milk",
+      ar: "حليب خالٍ من اللاكتوز",
+    },
+    price: 0.3,
   },
 ];
 
@@ -85,12 +103,12 @@ const smoothies = [
         id: 27,
         name: {
           de: "Açaí-Heidelbeer",
-          en: "Açaí Blueberry",
+          en: "Açaí-Blueberry",
           ar: "آساي وتوت أزرق",
         },
         subtitle: {
           de: "Açaí, Heidelbeer, Banane, Datteln und Sojamilch",
-          en: "Açaí, Blueberry, Banana, Dates and Soy milk",
+          en: "Açaí, Blueberry, Banana, Dates and Soy Milk",
           ar: "آساي، توت أزرق، موز، تمر وحليب الصويا",
         },
         price: 8.9,

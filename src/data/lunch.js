@@ -223,10 +223,11 @@ const lunch = [
           ar: "مقلاة طماطم شامية",
         },
         subtitle: {
-          de: "Geschmorte Tomaten mit Knoblauch, Basilikum und Olivenöl. Mit Fladenbrot serviert.",
-          en: "Stewed tomatoes with garlic, basil and olive oil. Served with flatbread.",
-          ar: "طماطم مطهية مع الثوم والريحان وزيت الزيتون، تقدم مع الخبز العربي.",
+          de: "Geschmorte Tomaten mit Knoblauch, Olivenöl, Basilikum und feiner Schärfe, traditionell orientalisch zubereitet und mit Fladenbrot serviert. Im Original scharf, auf Wunsch servieren wir es gerne auch mild.",
+          en: "Stewed tomatoes with garlic, olive oil, basil and a delicate spice, traditionally prepared in Middle Eastern style and served with flatbread. Originally spicy, but we can also serve it mild upon request.",
+          ar: "طماطم مطهية مع الثوم وزيت الزيتون والريحان ونكهة حارة خفيفة، تُحضّر بالطريقة الشرقية التقليدية وتُقدم مع الخبز العربي. الطبق يقدم حاراً بالأصل ويمكن طلبه بدون حار.",
         },
+
         price: 9.9,
         optionLabel: lunchOptionLabel,
         multipleExtras: false,
@@ -276,7 +277,7 @@ const lunch = [
           ar: "أرز، عدس، مكرونة، حمص، صلصة طماطم وبصل مقرمش. متوفر فقط في عطلة نهاية الأسبوع.",
         },
         price: 9.9,
-        optionLabel: lunchExtraLabel,
+        optionLabel: lunchOptionLabel,
         multipleExtras: false,
         extras: koshariOptions,
       },

@@ -21,6 +21,10 @@ function CartDrawer({
     return value;
   }
 
+  function formatPrice(price) {
+    return Number(price).toFixed(2).replace(".", ",");
+  }
+
   return (
     <div className="cart-drawer">
       <button onClick={onClose} className="close-cart-button">
@@ -53,11 +57,11 @@ function CartDrawer({
                 item.selectedExtras.map((extra) => (
                   <p className="cart-item-detail" key={extra.id}>
                     {t.extras}: {getText(extra.name)}
-                    {extra.price > 0 && ` +${extra.price.toFixed(2)}€`}
+                    {extra.price > 0 && ` +${formatPrice(extra.price)}€`}
                   </p>
                 ))}
 
-              <p>{(item.price * item.quantity).toFixed(2)}€</p>
+              <p>{formatPrice(item.price * item.quantity)}€</p>
 
               <div className="cart-quantity">
                 <QuantityControls
@@ -72,19 +76,19 @@ function CartDrawer({
           ))}
 
           <h3>
-  {t.total}: {total.toFixed(2)}€
-</h3>
+            {t.total}: {formatPrice(total)}€
+          </h3>
 
-      <textarea
-        className="order-note"
-        placeholder={t.orderNote}
-        value={orderNote}
-        onChange={(e) => setOrderNote(e.target.value)}
-      />
+          <textarea
+            className="order-note"
+            placeholder={t.orderNote}
+            value={orderNote}
+            onChange={(e) => setOrderNote(e.target.value)}
+          />
 
-      <button className="send-order-button" onClick={onSendOrder}>
-        {t.sendOrder}
-      </button>
+          <button className="send-order-button" onClick={onSendOrder}>
+            {t.sendOrder}
+          </button>
         </>
       )}
     </div>
