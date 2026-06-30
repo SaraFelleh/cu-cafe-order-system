@@ -1,3 +1,4 @@
+import { useState } from "react";
 import QuantityControls from "./QuantityControls";
 
 function MenuCard({
@@ -18,9 +19,14 @@ function MenuCard({
   onIncrease,
   getItemFinalPrice,
 }) {
+  const [showDescription, setShowDescription] = useState(false);
+
   function isExtraSelected(extraId) {
     return selectedExtras.some((extra) => extra.id === extraId);
   }
+
+  const description =
+    item.description?.[language] || item.description || "";
 
   return (
     <div className="menu-card">
@@ -30,6 +36,22 @@ function MenuCard({
         <p className="subtitle">
           {item.subtitle?.[language] || item.subtitle}
         </p>
+      )}
+
+      {description && (
+        <>
+          <p className={`product-description ${showDescription ? "open" : ""}`}>
+            {description}
+          </p>
+
+          <button
+            type="button"
+            className="read-more-btn"
+            onClick={() => setShowDescription(!showDescription)}
+          >
+            {showDescription ? "Weniger anzeigen ▲" : "Mehr anzeigen ▼"}
+          </button>
+        </>
       )}
 
       <div className="item-top">

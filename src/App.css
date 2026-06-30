@@ -785,6 +785,31 @@ button:hover {
 }
 
 /* =========================
+   product-description 
+========================= */
+.product-description {
+  margin-top: 12px;
+  color: var(--text-soft);
+  font-size: 14px;
+  line-height: 1.6;
+  max-height: 65px;
+  overflow: hidden;
+}
+
+.product-description.open {
+  max-height: none;
+}
+
+.read-more-btn {
+  margin-top: 8px;
+  border: none;
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: bold;
+  padding: 0;
+}
+
+/* =========================
    Responsive
 ========================= */
 

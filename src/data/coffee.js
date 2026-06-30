@@ -21,10 +21,19 @@ const milkOptions = [
     id: "soy",
     name: {
       de: "Sojamilch",
-      en: "Soy Milk",
+      en: "Soya Milk",
       ar: "حليب الصويا",
     },
     price: 0,
+  },
+  {
+    id: "lactose-free",
+    name: {
+      de: "Laktosefreie Milch",
+      en: "Lactose-free Milk",
+      ar: "حليب خالٍ من اللاكتوز",
+    },
+    price: 0.3,
   },
 ];
 
@@ -49,6 +58,7 @@ const coffee = [
         },
         price: 4.9,
       },
+
       {
         id: 2,
         name: {
@@ -58,6 +68,7 @@ const coffee = [
         },
         price: 2.9,
       },
+
       {
         id: 3,
         name: {
@@ -67,6 +78,7 @@ const coffee = [
         },
         price: 3.5,
       },
+
       {
         id: 4,
         name: {
@@ -77,6 +89,7 @@ const coffee = [
         priceText: "2,50€ / 3,40€",
         price: 2.5,
       },
+
       {
         id: 5,
         name: {
@@ -86,6 +99,7 @@ const coffee = [
         },
         price: 2.6,
       },
+
       {
         id: 6,
         name: {
@@ -95,6 +109,7 @@ const coffee = [
         },
         price: 3.9,
       },
+
       {
         id: 7,
         name: {
@@ -102,10 +117,10 @@ const coffee = [
           en: "Cappuccino",
           ar: "كابتشينو",
         },
-        price: 3.4,
-        priceText: "3,40€ / 4,50€",
+        price: 3.6,
+        priceText: "3,60€ / 4,50€",
         sizes: [
-          { id: "02", name: "0.2L", price: 3.4 },
+          { id: "02", name: "0.2L", price: 3.6 },
           { id: "03", name: "0.3L", price: 4.5 },
         ],
         optionLabel: {
@@ -117,6 +132,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 8,
         name: {
@@ -134,6 +150,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 9,
         name: {
@@ -151,6 +168,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 10,
         name: {
@@ -168,6 +186,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 11,
         name: {
@@ -185,6 +204,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 12,
         name: {
@@ -202,6 +222,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 13,
         name: {
@@ -219,6 +240,7 @@ const coffee = [
         multipleExtras: false,
         extras: milkOptions,
       },
+
       {
         id: 14,
         name: {
