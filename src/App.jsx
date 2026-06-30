@@ -122,7 +122,12 @@ function addToCart(item, itemKey) {
 
   const selectedExtras = selectedOptions[itemKey] || [];
 
-if (item.extras && item.multipleExtras === false && selectedExtras.length === 0) {
+if (
+  item.extras &&
+  item.multipleExtras === false &&
+  !item.allowNoSelection &&
+  selectedExtras.length === 0
+) {
   if (item.optionType === "milk") {
     alert(t.selectMilkRequired);
   } else {

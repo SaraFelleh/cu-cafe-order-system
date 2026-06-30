@@ -25,12 +25,6 @@ const tea = [
     icon: "🍵",
     image: "/images/tee.png",
 
-    description: {
-      de: "Bitte wählen Sie Ihre Teesorte.",
-      en: "Please choose your tea.",
-      ar: "يرجى اختيار نوع الشاي.",
-    },
-
     items: [
       {
         id: 15,

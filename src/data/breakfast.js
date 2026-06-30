@@ -157,6 +157,7 @@ const breakfast = [
         price: 14.9,
         optionLabel: breakfastExtraLabel,
         multipleExtras: false,
+        allowNoSelection: true,
         extras: proteifullExtras,
       },
 

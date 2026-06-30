@@ -119,7 +119,7 @@ const lunch = [
         },
         price: 8.0,
         optionLabel: lunchOptionLabel,
-        multipleExtras: false,
+        multipleExtras: true,
         extras: bakedPotatoExtras,
       },
 
