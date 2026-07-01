@@ -40,7 +40,7 @@ Finished with authentic Ashta, delicate rose water, natural mastic and freshly c
 تُحضّر بالقشطة الطبيعية وماء الورد والمستكة، ثم تُغطى بالفستق الحلبي الطازج لتقدم لك تجربة غنية تجمع بين الأصالة والطعم الفريد.`,
         },
 
-        price: 7,
+        price: 6.90,
 
         optionLabel: {
           de: "Extras",

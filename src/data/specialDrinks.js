@@ -17,13 +17,15 @@ const sebastianSauces = [
     },
     price: 1,
   },
+
   {
-    id: "caramel",
+
+    id: "brulee",
     name: {
-      de: "Karamellsoße",
-      en: "Caramel Sauce",
-      ar: "صوص كراميل",
-    },
+     de: "Brûlée-Soße",
+     en: "Brûlée Sauce",
+     ar: "صوص كريم بروليه",
+  },
     price: 1,
   },
   {

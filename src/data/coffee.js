@@ -116,14 +116,7 @@ const coffee = [
           ar: "إسبريسو أفوغاتو",
         },
         price: 3.9,
-        optionLabel: {
-          de: "Milch",
-          en: "Milk",
-          ar: "الحليب",
-        },
-        optionType: "milk",
-        multipleExtras: false,
-        extras: milkOptions,
+
       },
 
       {
