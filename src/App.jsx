@@ -209,7 +209,20 @@ if (
       return;
     }
 
-    const today = new Date().toISOString().split("T")[0];
+    const dateParts = Object.fromEntries(
+  new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Berlin",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+    .formatToParts(new Date())
+    .filter((part) => part.type !== "literal")
+    .map((part) => [part.type, part.value])
+);
+
+const today = `${dateParts.year}-${dateParts.month}-${dateParts.day}`;
+const shortDate = `${dateParts.year.slice(-2)}${dateParts.month}${dateParts.day}`;
     const counterRef = doc(db, "dailyCounters", today);
 
 try {
@@ -233,15 +246,18 @@ try {
     return 1;
   });
 
-      const order = {
-       orderNumber: String(orderNumber).padStart(3, "0"),
-       table: table,
-       items: cart,
-       total: total,
-       note: orderNote,
-       status: "new",
-       createdAt: serverTimestamp(),
-      };
+const formattedOrderNumber = String(orderNumber).padStart(3, "0");
+
+const order = {
+  orderNumber: formattedOrderNumber,
+  orderCode: `${shortDate}-${formattedOrderNumber}`,
+  table: table,
+  items: cart,
+  total: total,
+  note: orderNote,
+  status: "new",
+  createdAt: serverTimestamp(),
+};
 
       await addDoc(collection(db, "orders"), order);
 
