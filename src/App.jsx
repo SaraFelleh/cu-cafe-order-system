@@ -250,7 +250,7 @@ const formattedOrderNumber = String(orderNumber).padStart(3, "0");
 
 const order = {
   orderNumber: formattedOrderNumber,
-  orderCode: `${shortDate}-${formattedOrderNumber}`,
+
   table: table,
   items: cart,
   total: total,
