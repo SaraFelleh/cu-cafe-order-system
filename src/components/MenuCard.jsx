@@ -49,7 +49,9 @@ function MenuCard({
             className="read-more-btn"
             onClick={() => setShowDescription(!showDescription)}
           >
-            {showDescription ? "Weniger anzeigen ▲" : "Mehr anzeigen ▼"}
+            {showDescription
+            ? `${t.showLess} ▲`
+            : `${t.showMore} ▼`}
           </button>
         </>
       )}

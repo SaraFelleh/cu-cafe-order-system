@@ -249,20 +249,6 @@ const lunch = [
         price: 13.9,
       },
 
-      {
-        id: 55,
-        name: {
-          de: "Mac & Chicken",
-          en: "Mac & Chicken",
-          ar: "ماك آند تشيكن",
-        },
-        subtitle: {
-          de: "Makkaroni mit Béchamelsauce und knusprigem Hähnchenschnitzel.",
-          en: "Macaroni with béchamel sauce and crispy chicken schnitzel.",
-          ar: "مكرونة بالبشاميل مع شنيتزل دجاج مقرمش.",
-        },
-        price: 12.9,
-      },
 
       {
         id: 56,

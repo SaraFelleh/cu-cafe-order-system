@@ -4,6 +4,7 @@ import coldDrinks from "./coldDrinks";
 import smoothies from "./smoothies";
 import summerDrinks from "./summerDrinks";
 import specialDrinks from "./specialDrinks";
+import cakes from "./cakes";
 import arabicIceCream from "./arabicIceCream";
 import snacks from "./snacks";
 import breakfast from "./breakfast";
@@ -16,6 +17,7 @@ export const menu = [
   ...smoothies,
   ...summerDrinks,
   ...specialDrinks,
+  ...cakes,
   ...arabicIceCream,
   ...snacks,
   ...breakfast,
