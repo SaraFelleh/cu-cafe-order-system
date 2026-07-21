@@ -16,102 +16,64 @@ function Cashier() {
   const firstStaffCallsLoad = useRef(true);
 
   const soundEnabledRef = useRef(false);
-  const audioRef = useRef(null);
+
+  const notificationAudioRef = useRef(null);
+  const staffCallAudioRef = useRef(null);
 
   useEffect(() => {
-    const audio = new Audio();
-    audio.preload = "auto";
-    audio.volume = 1;
-    audio.playsInline = true;
-    audioRef.current = audio;
+    const notificationAudio = new Audio("/notification.mp3");
+    notificationAudio.preload = "auto";
+    notificationAudio.volume = 1;
+    notificationAudio.playsInline = true;
+
+    const staffCallAudio = new Audio("/staff-call.mp3");
+    staffCallAudio.preload = "auto";
+    staffCallAudio.volume = 1;
+    staffCallAudio.playsInline = true;
+
+    notificationAudioRef.current = notificationAudio;
+    staffCallAudioRef.current = staffCallAudio;
+
+    notificationAudio.load();
+    staffCallAudio.load();
 
     return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.removeAttribute("src");
-        audioRef.current.load();
-        audioRef.current = null;
-      }
+      [notificationAudioRef.current, staffCallAudioRef.current].forEach(
+        (audio) => {
+          if (!audio) return;
+
+          audio.pause();
+          audio.removeAttribute("src");
+          audio.load();
+        }
+      );
+
+      notificationAudioRef.current = null;
+      staffCallAudioRef.current = null;
     };
   }, []);
 
   function getText(value) {
     if (!value) return "";
+
     if (typeof value === "object") {
       return value.de || value.en || value.ar || "";
     }
+
     return value;
   }
 
-  function getSupportedSoundSources(baseName) {
-    const testAudio = document.createElement("audio");
-    const sources = [];
-
-    const supportsMp3 = testAudio.canPlayType("audio/mpeg");
-    const supportsWav = testAudio.canPlayType("audio/wav");
-
-    if (supportsMp3) {
-      sources.push(`/${baseName}.mp3`);
-    }
-
-    if (supportsWav) {
-      sources.push(`/${baseName}.wav`);
-    }
-
-    // Fallback: حتى لو أعاد المتصفح قيمة فارغة، نجرب الصيغتين.
-    if (sources.length === 0) {
-      sources.push(`/${baseName}.mp3`, `/${baseName}.wav`);
-    }
-
-    return sources;
-  }
-
-  async function tryPlaySources(baseName, preview = false) {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      throw new Error("Audio player is not ready");
-    }
-
-    const sources = getSupportedSoundSources(baseName);
-    let lastError = null;
-
-    for (const source of sources) {
-      try {
-        audio.pause();
-        audio.currentTime = 0;
-        audio.src = source;
-        audio.volume = preview ? 0.25 : 1;
-        audio.load();
-
-        await audio.play();
-
-        if (preview) {
-          audio.pause();
-          audio.currentTime = 0;
-          audio.volume = 1;
-        }
-
-        return source;
-      } catch (error) {
-        lastError = error;
-        console.warn(`Could not play ${source}`, error);
-      }
-    }
-
-    throw lastError || new Error(`Could not play ${baseName}`);
-  }
-
-  async function playSound(baseName) {
-    if (!soundEnabledRef.current) return;
+  async function playAudio(audio) {
+    if (!audio || !soundEnabledRef.current) return;
 
     try {
-      await tryPlaySources(baseName, false);
+      audio.pause();
+      audio.currentTime = 0;
+      audio.volume = 1;
+
+      await audio.play();
     } catch (error) {
       console.error("Notification sound failed:", error);
-
-      soundEnabledRef.current = false;
-      setSoundEnabled(false);
 
       const message = `${error?.name || "AudioError"}: ${
         error?.message || "Sound playback failed"
@@ -122,11 +84,90 @@ function Cashier() {
   }
 
   function playNotificationSound() {
-    void playSound("notification");
+    void playAudio(notificationAudioRef.current);
   }
 
   function playStaffCallSound() {
-    void playSound("staff-call");
+    void playAudio(staffCallAudioRef.current);
+  }
+
+  async function enableSound() {
+    setSoundError("");
+
+    const notificationAudio = notificationAudioRef.current;
+    const staffCallAudio = staffCallAudioRef.current;
+
+    if (!notificationAudio || !staffCallAudio) {
+      const message = "Audio player is not ready yet. Please try again.";
+      setSoundError(message);
+      alert(message);
+      return;
+    }
+
+    try {
+      /*
+       * يجب تشغيل الصوت مباشرة داخل حدث الضغط.
+       * لا نغيّر src عند وصول الطلب، لأن بعض أجهزة iPhone
+       * تعتبر تغيير المصدر تشغيلًا جديدًا وتمنعه.
+       */
+      notificationAudio.pause();
+      notificationAudio.currentTime = 0;
+      notificationAudio.volume = 1;
+
+      await notificationAudio.play();
+
+      /*
+       * نترك الصوت يعمل مدة قصيرة بدل إيقافه فورًا،
+       * حتى يسجل المتصفح تفاعل المستخدم بشكل صحيح.
+       */
+      await new Promise((resolve) => {
+        window.setTimeout(resolve, 700);
+      });
+
+      notificationAudio.pause();
+      notificationAudio.currentTime = 0;
+
+      /*
+       * نحاول تجهيز صوت طلب الموظف خلال نفس تفاعل المستخدم.
+       * فشل هذا الجزء لا يلغي تفعيل صوت الطلبات.
+       */
+      try {
+        staffCallAudio.muted = true;
+        staffCallAudio.currentTime = 0;
+
+        await staffCallAudio.play();
+
+        staffCallAudio.pause();
+        staffCallAudio.currentTime = 0;
+        staffCallAudio.muted = false;
+      } catch (staffAudioError) {
+        staffCallAudio.muted = false;
+        console.warn(
+          "Staff-call sound could not be pre-unlocked:",
+          staffAudioError
+        );
+      }
+
+      soundEnabledRef.current = true;
+      setSoundEnabled(true);
+      setSoundError("");
+
+      console.log("Notification sounds enabled successfully.");
+    } catch (error) {
+      console.error("Sound activation failed:", error);
+
+      soundEnabledRef.current = false;
+      setSoundEnabled(false);
+
+      const message = `${error?.name || "AudioError"}: ${
+        error?.message || "Sound could not be enabled"
+      }`;
+
+      setSoundError(message);
+      alert(
+        `${message}\n\nPlease make sure the phone is not on silent mode and press Enable Sound again.`
+      );
+    }
   }
 
   function renderOrderItems(items) {
@@ -206,6 +247,7 @@ function Cashier() {
           const timeA = a.createdAt?.toMillis
             ? a.createdAt.toMillis()
             : 0;
+
           const timeB = b.createdAt?.toMillis
             ? b.createdAt.toMillis()
             : 0;
@@ -253,6 +295,7 @@ function Cashier() {
           const timeA = a.createdAt?.toMillis
             ? a.createdAt.toMillis()
             : 0;
+
           const timeB = b.createdAt?.toMillis
             ? b.createdAt.toMillis()
             : 0;
@@ -306,36 +349,10 @@ function Cashier() {
     }
   }
 
-  async function enableSound() {
-    setSoundError("");
-
-    try {
-      // نشغّل صوتًا واحدًا فقط أثناء ضغطة المستخدم.
-      // هذا أكثر توافقًا مع قيود iPhone وSafari.
-      const usedSource = await tryPlaySources("notification", true);
-
-      soundEnabledRef.current = true;
-      setSoundEnabled(true);
-
-      console.log(`Sound enabled using: ${usedSource}`);
-    } catch (error) {
-      console.error("Sound activation failed:", error);
-
-      soundEnabledRef.current = false;
-      setSoundEnabled(false);
-
-      const message = `${error?.name || "AudioError"}: ${
-        error?.message || "Sound could not be enabled"
-      }`;
-
-      setSoundError(message);
-      alert(message);
-    }
-  }
-
   const visibleOrders = orders.filter(
     (order) => order.status !== "done"
   );
+
   const doneOrders = orders.filter(
     (order) => order.status === "done"
   );
@@ -347,7 +364,14 @@ function Cashier() {
       <button onClick={() => signOut(auth)}>Logout</button>
 
       {!soundEnabled ? (
-        <button onClick={enableSound} style={{ marginLeft: "10px" }}>
+        <button
+          onClick={enableSound}
+          style={{
+            marginLeft: "10px",
+            padding: "10px 14px",
+            cursor: "pointer",
+          }}
+        >
           🔔 Enable Sound
         </button>
       ) : (
@@ -360,6 +384,17 @@ function Cashier() {
         >
           🔔 Sound enabled
         </span>
+      )}
+
+      {!soundEnabled && (
+        <p
+          style={{
+            marginTop: "10px",
+            fontSize: "14px",
+          }}
+        >
+          Press “Enable Sound” once after opening the cashier page.
+        </p>
       )}
 
       {soundError && (
@@ -494,9 +529,7 @@ function Cashier() {
                 <div className="order-card" key={order.id}>
                   <div className="order-header">
                     <div>
-                      <h2>
-                        Order #{order.orderNumber || "---"}
-                      </h2>
+                      <h2>Order #{order.orderNumber || "---"}</h2>
                       <p>Table {order.table}</p>
                     </div>
 
@@ -507,9 +540,7 @@ function Cashier() {
 
                   <p className="order-time">
                     {order.createdAt?.toDate
-                      ? order.createdAt
-                          .toDate()
-                          .toLocaleString()
+                      ? order.createdAt.toDate().toLocaleString()
                       : order.createdAt || "Loading..."}
                   </p>
 
