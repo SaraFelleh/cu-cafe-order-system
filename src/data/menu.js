@@ -15,7 +15,7 @@ export const menu = [
   ...tea,
   ...coldDrinks,
   ...smoothies,
-  ...summerDrinks,
+  //...summerDrinks,
   ...specialDrinks,
   ...cakes,
   ...arabicIceCream,
