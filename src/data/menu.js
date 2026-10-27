@@ -3,6 +3,7 @@ import tea from "./tea";
 import coldDrinks from "./coldDrinks";
 import smoothies from "./smoothies";
 import summerDrinks from "./summerDrinks";
+import winterDrinks from "./winterDrinks";
 import specialDrinks from "./specialDrinks";
 import cakes from "./cakes";
 import arabicIceCream from "./arabicIceCream";
@@ -16,6 +17,7 @@ export const menu = [
   ...coldDrinks,
   ...smoothies,
   //...summerDrinks,
+  ...winterDrinks,
   ...specialDrinks,
   ...cakes,
   ...arabicIceCream,
