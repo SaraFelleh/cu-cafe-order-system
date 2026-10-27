@@ -335,13 +335,13 @@ return (
   {menu.map((category) => (
     <section
       id={category.category.replace(/\s+/g, "-")}
-      className="category-section"
+      className={`category-section ${category.category === "Winter Drinks" ? "winter-category" : ""}`}
       key={category.category}
     >
       <img
         src={category.image}
         alt={category.category}
-        className="category-image"
+        className={`category-image ${category.category === "Winter Drinks" ? "winter-category-image" : ""}`}
       />
 
       <div className="category-nav category-nav-inside">
@@ -350,6 +350,8 @@ return (
             key={cat.category}
             className={`category-nav-btn ${
               cat.category === category.category ? "active" : ""
+            } ${
+              cat.category === "Winter Drinks" ? "winter-shine" : ""
             }`}
             onClick={() =>
               document
@@ -361,6 +363,9 @@ return (
             }
           >
             {cat.icon} {t[cat.category] || cat.category}
+            {cat.category === "Winter Drinks" && (
+              <span className="winter-new-badge">NEW</span>
+            )}
           </button>
         ))}
       </div>
