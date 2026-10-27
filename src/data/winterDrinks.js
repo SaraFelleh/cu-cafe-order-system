@@ -41,7 +41,7 @@ const winterDrinks = [
         name: {
           de: "Golden Milk",
           en: "Golden Milk",
-          ar: "الحليب الذهبي",
+          ar: "غولدن ميلك",
         },
         subtitle: {
           de: "Mit Kurkuma, Ingwer, Ashwagandha, Kokos, Vanille und Milch.",
