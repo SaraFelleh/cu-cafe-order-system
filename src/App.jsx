@@ -170,6 +170,7 @@ if (
         price: finalPrice,
         selectedSize: selectedSize || null,
         selectedExtras: selectedExtras,
+        priceOpen: item.price == null && !item.sizes,
         quantity: 1,
       },
     ]);
@@ -258,6 +259,7 @@ const orderItems = cart.map((item) => ({
   name: item.name,
   quantity: item.quantity,
   price: item.price,
+  priceOpen: item.priceOpen || false,
   selectedSize: item.selectedSize ? { name: item.selectedSize.name } : null,
   selectedExtras: item.selectedExtras.map((extra) => ({
     name: extra.name,

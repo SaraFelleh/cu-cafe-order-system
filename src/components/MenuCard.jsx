@@ -62,7 +62,7 @@ function MenuCard({
             ? item.priceText
             : item.price != null
             ? `${item.price.toFixed(2).replace(".", ",")}€`
-            : t.askStaff}
+            : t.priceAtCounter}
         </span>
       </div>
 
@@ -150,7 +150,7 @@ function MenuCard({
             {t.selectOptions} ▼
           </button>
         )
-      ) : item.price == null ? null : (
+      ) : (
         <button className="add-button" onClick={() => onAddToCart(item, itemKey)}>
           {t.add}
         </button>

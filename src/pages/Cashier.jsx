@@ -192,7 +192,9 @@ function Cashier() {
         <p>
           {item.quantity ? `${item.quantity}× ` : ""}
           {getText(item.name)} -{" "}
-          {(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}€
+          {item.priceOpen
+            ? "⚠️ Preis offen (siehe Notiz)"
+            : `${(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}€`}
         </p>
 
         {item.selectedSize && (

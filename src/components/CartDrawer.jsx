@@ -61,7 +61,14 @@ function CartDrawer({
                   </p>
                 ))}
 
-              <p>{formatPrice(item.price * item.quantity)}€</p>
+              {item.priceOpen ? (
+                <>
+                  <p>{t.priceAtCounter}</p>
+                  <p className="cart-item-detail">✏️ {t.writeInNote}</p>
+                </>
+              ) : (
+                <p>{formatPrice(item.price * item.quantity)}€</p>
+              )}
 
               <div className="cart-quantity">
                 <QuantityControls
