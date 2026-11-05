@@ -47,7 +47,7 @@ const summerDrinks = [
   {
     category: "Summer Drinks",
     icon: "🧋",
-    image: "/images/summer-drinks.png",
+    image: "/images/summer-drinks.jpg",
 
     items: [
       {

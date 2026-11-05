@@ -2,7 +2,7 @@ const specialDrinks = [
   {
     category: "Special Drinks",
     icon: "✨",
-    image: "/images/special-drinks.png",
+    image: "/images/special-drinks.jpg",
 
     items: [
       {

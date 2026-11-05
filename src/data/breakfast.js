@@ -82,7 +82,7 @@ const breakfast = [
   {
     category: "Frühstück",
     icon: "🍳",
-    image: "/images/frühstück.png",
+    image: "/images/fruehstueck.jpg",
 
     description: {
       de: "Bis 14 Uhr",

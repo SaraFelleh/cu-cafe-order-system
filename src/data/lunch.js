@@ -66,7 +66,7 @@ const lunch = [
   {
     category: "Mittagessen",
     icon: "🍽️",
-    image: "/images/mittagessen.png",
+    image: "/images/mittagessen.jpg",
 
     description: {
       de: "14:00 Uhr bis 19:30 Uhr",

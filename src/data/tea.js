@@ -23,7 +23,7 @@ const tea = [
   {
     category: "Tea",
     icon: "🍵",
-    image: "/images/tee.png",
+    image: "/images/tee.jpg",
 
     items: [
       {

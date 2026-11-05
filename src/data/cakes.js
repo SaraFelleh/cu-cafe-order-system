@@ -47,7 +47,7 @@ const cakes = [
   {
     category: "Cakes",
     icon: "🍰",
-    image: "/images/cakes.png",
+    image: "/images/cakes.jpg",
 
     items: [
       {

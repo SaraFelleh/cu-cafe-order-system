@@ -101,7 +101,7 @@ const coldDrinks = [
   {
     category: "Cold Drinks",
     icon: "🥤",
-    image: "/images/cold-drinks.png",
+    image: "/images/cold-drinks.jpg",
 
     items: [
       {

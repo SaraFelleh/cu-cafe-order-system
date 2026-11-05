@@ -1,10 +1,23 @@
 import { useEffect, useRef, useState } from "react";
 import { db, auth } from "../firebase/firebase";
-import { collection, onSnapshot, doc, updateDoc } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  updateDoc,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  Timestamp,
+} from "firebase/firestore";
 import { signOut } from "firebase/auth";
 
 function Cashier() {
   const [orders, setOrders] = useState([]);
+  const [historyOrders, setHistoryOrders] = useState([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
+  const [connectionError, setConnectionError] = useState("");
   const [staffCalls, setStaffCalls] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(false);
@@ -178,7 +191,8 @@ function Cashier() {
       >
         <p>
           {item.quantity ? `${item.quantity}× ` : ""}
-          {getText(item.name)} - {Number(item.price || 0).toFixed(2)}€
+          {getText(item.name)} -{" "}
+          {(Number(item.price || 0) * Number(item.quantity || 1)).toFixed(2)}€
         </p>
 
         {item.selectedSize && (
@@ -223,8 +237,14 @@ function Cashier() {
   }
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
+    // نجيب بس الطلبات المفتوحة (مش كل الطلبات من أول يوم)
+    const activeOrdersQuery = query(
       collection(db, "orders"),
+      where("status", "in", ["new", "accepted"])
+    );
+
+    const unsubscribe = onSnapshot(
+      activeOrdersQuery,
       (snapshot) => {
         const ordersData = snapshot.docs.map((document) => ({
           id: document.id,
@@ -269,9 +289,11 @@ function Cashier() {
         firstOrdersLoad.current = false;
         previousNewOrdersCount.current = newOrdersCount;
         setOrders(ordersData);
+        setConnectionError("");
       },
       (error) => {
         console.error("Orders listener error:", error);
+        setConnectionError(error.message);
       }
     );
 
@@ -279,17 +301,21 @@ function Cashier() {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(
+    // نجيب بس طلبات الموظف المفتوحة
+    const activeCallsQuery = query(
       collection(db, "staffCalls"),
+      where("status", "==", "new")
+    );
+
+    const unsubscribe = onSnapshot(
+      activeCallsQuery,
       (snapshot) => {
         const callsData = snapshot.docs.map((document) => ({
           id: document.id,
           ...document.data(),
         }));
 
-        const activeCalls = callsData.filter(
-          (call) => call.status !== "done"
-        );
+        const activeCalls = callsData;
 
         activeCalls.sort((a, b) => {
           const timeA = a.createdAt?.toMillis
@@ -316,22 +342,91 @@ function Cashier() {
       },
       (error) => {
         console.error("Staff calls listener error:", error);
+        setConnectionError(error.message);
       }
     );
 
     return () => unsubscribe();
   }, []);
 
-  async function updateStatus(orderId, status) {
+  // الـ History: آخر 30 يوم، بينحمّلوا مرة وحدة (مش اتصال مباشر)
+  async function loadHistory() {
+    setHistoryLoading(true);
+
     try {
-      const currentOrder = orders.find(
-        (order) => order.id === orderId
+      const since = new Date();
+      since.setDate(since.getDate() - 30);
+      since.setHours(0, 0, 0, 0);
+
+      const historyQuery = query(
+        collection(db, "orders"),
+        where("createdAt", ">=", Timestamp.fromDate(since)),
+        orderBy("createdAt", "desc")
       );
 
+      const snapshot = await getDocs(historyQuery);
+
+      const data = snapshot.docs
+        .map((document) => ({ id: document.id, ...document.data() }))
+        .filter((order) => order.status === "done");
+
+      setHistoryOrders(data);
+    } catch (error) {
+      console.error("History load error:", error);
+      alert("Could not load history");
+    }
+
+    setHistoryLoading(false);
+  }
+
+  function toggleHistory() {
+    if (!showHistory) {
+      loadHistory();
+    }
+
+    setShowHistory(!showHistory);
+  }
+
+  // نقسّم الطلبات حسب اليوم
+  function groupByDay(list) {
+    const groups = [];
+
+    list.forEach((order) => {
+      const date = order.createdAt?.toDate ? order.createdAt.toDate() : null;
+
+      const label = date
+        ? date.toLocaleDateString("de-DE", {
+            weekday: "long",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+          })
+        : "Unknown date";
+
+      let group = groups.find((g) => g.label === label);
+
+      if (!group) {
+        group = { label, orders: [], total: 0 };
+        groups.push(group);
+      }
+
+      group.orders.push(order);
+      group.total += Number(order.total || 0);
+    });
+
+    return groups;
+  }
+
+  async function updateStatus(orderId, status) {
+    try {
       await updateDoc(doc(db, "orders", orderId), {
         status,
-        note: currentOrder?.note || "",
       });
+
+      // إذا الـ History مفتوح، منحدّثه ليظهر الطلب الجديد فيه
+      if (status === "done" && showHistory) {
+        loadHistory();
+      }
     } catch (error) {
       console.error(error);
       alert("Could not update order status");
@@ -349,23 +444,8 @@ function Cashier() {
     }
   }
 
-  const visibleOrders = orders.filter(
-    (order) => order.status !== "done"
-  );
-
-const doneOrders = orders
-  .filter((order) => order.status === "done")
-  .sort((a, b) => {
-    const timeA = a.createdAt?.toMillis
-      ? a.createdAt.toMillis()
-      : 0;
-
-    const timeB = b.createdAt?.toMillis
-      ? b.createdAt.toMillis()
-      : 0;
-
-    return timeB - timeA;
-  });
+  const visibleOrders = orders;
+  const historyGroups = groupByDay(historyOrders);
 
   return (
     <div className="cashier-page">
@@ -419,6 +499,24 @@ const doneOrders = orders
           }}
         >
           {soundError}
+        </p>
+      )}
+
+      {connectionError && (
+        <p
+          style={{
+            marginTop: "12px",
+            padding: "12px",
+            background: "#ffe4e4",
+            color: "#9b0000",
+            borderRadius: "8px",
+            fontWeight: "bold",
+          }}
+        >
+          ⚠️ Connection problem – orders may not be up to date. Please reload
+          the page.
+          <br />
+          <small>{connectionError}</small>
         </p>
       )}
 
@@ -520,53 +618,67 @@ const doneOrders = orders
         )}
       </div>
 
-      <button
-        onClick={() => setShowHistory(!showHistory)}
-        style={{ marginTop: "40px" }}
-      >
+      <button onClick={toggleHistory} style={{ marginTop: "40px" }}>
         {showHistory ? "Hide History" : "Show History"}
       </button>
 
       {showHistory && (
         <>
-          <h2 style={{ marginTop: "30px" }}>History</h2>
+          <h2 style={{ marginTop: "30px" }}>History (last 30 days)</h2>
 
-          <div className="orders-grid">
-            {doneOrders.length === 0 ? (
-              <p>No completed orders yet</p>
-            ) : (
-              doneOrders.map((order) => (
-                <div className="order-card" key={order.id}>
-                  <div className="order-header">
-                    <div>
-                      <h2>Order #{order.orderNumber || "---"}</h2>
-                      <p>Table {order.table}</p>
+          <button onClick={loadHistory} disabled={historyLoading}>
+            {historyLoading ? "Loading..." : "🔄 Refresh"}
+          </button>
+
+          {!historyLoading && historyGroups.length === 0 && (
+            <p>No completed orders yet</p>
+          )}
+
+          {historyGroups.map((group) => (
+            <div key={group.label}>
+              <h3
+                style={{
+                  marginTop: "30px",
+                  paddingBottom: "8px",
+                  borderBottom: "1px solid #444",
+                }}
+              >
+                {group.label} · {group.orders.length} orders · Total{" "}
+                {group.total.toFixed(2)}€
+              </h3>
+
+              <div className="orders-grid">
+                {group.orders.map((order) => (
+                  <div className="order-card" key={order.id}>
+                    <div className="order-header">
+                      <div>
+                        <h2>Order #{order.orderNumber || "---"}</h2>
+                        <p>Table {order.table}</p>
+                      </div>
+
+                      <span className={`status ${order.status}`}>
+                        {order.status}
+                      </span>
                     </div>
 
-                    <span className={`status ${order.status}`}>
-                      {order.status}
-                    </span>
+                    <p className="order-time">
+                      {order.createdAt?.toDate
+                        ? order.createdAt.toDate().toLocaleTimeString("de-DE")
+                        : ""}
+                    </p>
+
+                    <div className="order-items">
+                      {renderOrderItems(order.items)}
+                    </div>
+
+                    {renderOrderNote(order.note)}
+
+                    <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
                   </div>
-
-                  <p className="order-time">
-                    {order.createdAt?.toDate
-                      ? order.createdAt.toDate().toLocaleString()
-                      : order.createdAt || "Loading..."}
-                  </p>
-
-                  <div className="order-items">
-                    {renderOrderItems(order.items)}
-                  </div>
-
-                  {renderOrderNote(order.note)}
-
-                  <h3>
-                    Total: {Number(order.total || 0).toFixed(2)}€
-                  </h3>
-                </div>
-              ))
-            )}
-          </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </>
       )}
     </div>

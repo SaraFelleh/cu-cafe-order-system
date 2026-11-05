@@ -2,7 +2,7 @@ const snacks = [
   {
     category: "Snacks",
     icon: "🥐",
-    image: "/images/snacks.png",
+    image: "/images/snacks.jpg",
 
     items: [
       {

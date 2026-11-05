@@ -47,7 +47,7 @@ const smoothies = [
   {
     category: "Smoothies",
     icon: "🍹",
-    image: "/images/smoothies.png",
+    image: "/images/smoothies.jpg",
 
     items: [
       {

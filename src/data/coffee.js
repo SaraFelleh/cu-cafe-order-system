@@ -41,7 +41,7 @@ const coffee = [
   {
     category: "Coffee",
     icon: "☕",
-    image: "/images/coffee.png",
+    image: "/images/coffee.jpg",
 
     items: [
       {

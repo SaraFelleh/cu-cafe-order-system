@@ -2,7 +2,7 @@ const arabicIceCream = [
   {
     category: "Arabisches Booza",
     icon: "🍨",
-    image: "/images/arabic-booza.png",
+    image: "/images/arabic-booza.jpg",
 
     items: [
       {
