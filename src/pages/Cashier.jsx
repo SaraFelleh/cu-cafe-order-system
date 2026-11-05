@@ -643,7 +643,8 @@ function Cashier() {
                   borderBottom: "1px solid #444",
                 }}
               >
-                {group.label} · {group.orders.length} orders · Total{" "}
+                {group.label} · {group.orders.length}{" "}
+                {group.orders.length === 1 ? "order" : "orders"} · Total{" "}
                 {group.total.toFixed(2)}€
               </h3>
 

@@ -33,8 +33,13 @@ function App() {
   const [staffCalled, setStaffCalled] = useState(false);
   const [orderNote, setOrderNote] = useState("");
   const t = translations[language];
-  const table =
-    new URLSearchParams(window.location.search).get("table") || "Unknown";
+  // رقم الطاولة من الـ QR (مسموح بس من 1 لـ 30)
+  const tableNumber = Number(
+    new URLSearchParams(window.location.search).get("table")
+  );
+  const validTable =
+    Number.isInteger(tableNumber) && tableNumber >= 1 && tableNumber <= 30;
+  const table = validTable ? String(tableNumber) : "Unknown";
 
   const path = window.location.pathname;
   useEffect(() => {
@@ -248,11 +253,23 @@ try {
 
 const formattedOrderNumber = String(orderNumber).padStart(3, "0");
 
+// منخزّن بس اللي بيحتاجه الكاشير (مش كل بيانات المنتج)
+const orderItems = cart.map((item) => ({
+  name: item.name,
+  quantity: item.quantity,
+  price: item.price,
+  selectedSize: item.selectedSize ? { name: item.selectedSize.name } : null,
+  selectedExtras: item.selectedExtras.map((extra) => ({
+    name: extra.name,
+    price: extra.price,
+  })),
+}));
+
 const order = {
   orderNumber: formattedOrderNumber,
 
   table: table,
-  items: cart,
+  items: orderItems,
   total: total,
   note: orderNote,
   status: "new",
@@ -291,6 +308,19 @@ const order = {
     console.error(error);
     alert(t.orderError);
   }
+}
+
+if (!validTable) {
+  return (
+    <div className="closed-page">
+      <div className="closed-page-card">
+        <h1>📱 QR-Code scannen</h1>
+        <p>Bitte scannen Sie den QR-Code auf Ihrem Tisch, um zu bestellen.</p>
+        <p>Please scan the QR code on your table to order.</p>
+        <p dir="rtl">يرجى مسح رمز QR الموجود على طاولتك لتتمكن من الطلب.</p>
+      </div>
+    </div>
+  );
 }
 
 if (sessionClosed && path !== "/cashier") {

@@ -150,7 +150,7 @@ function MenuCard({
             {t.selectOptions} ▼
           </button>
         )
-      ) : (
+      ) : item.price == null ? null : (
         <button className="add-button" onClick={() => onAddToCart(item, itemKey)}>
           {t.add}
         </button>
