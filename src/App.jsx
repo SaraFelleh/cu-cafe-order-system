@@ -294,6 +294,9 @@ const order = {
   }
 
   async function callStaff() {
+  // بعد كل كبسة، الزر بيوقف 30 ثانية (ما حدا يرن الجرس كتير ورا بعض)
+  if (staffCalled) return;
+
   try {
     await addDoc(collection(db, "staffCalls"), {
       table: table,
@@ -305,7 +308,7 @@ const order = {
 
     setTimeout(() => {
       setStaffCalled(false);
-    }, 2500);
+    }, 30000);
   } catch (error) {
     console.error(error);
     alert(t.orderError);

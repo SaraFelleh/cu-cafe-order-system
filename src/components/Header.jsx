@@ -33,7 +33,12 @@ function Header({
 </div>
 
 <div className="staff-call-wrapper">
-  <button className="staff-call-button" onClick={onCallStaff}>
+  <button
+    className="staff-call-button"
+    onClick={onCallStaff}
+    disabled={staffCalled}
+    style={staffCalled ? { opacity: 0.5, cursor: "not-allowed" } : undefined}
+  >
     🛎️ {t.callStaff}
   </button>
 

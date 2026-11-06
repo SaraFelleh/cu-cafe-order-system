@@ -592,7 +592,11 @@ function Cashier() {
 
               {renderOrderNote(order.note)}
 
-              <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
+              <h3>
+                Total: {Number(order.total || 0).toFixed(2)}€
+                {order.items?.some((item) => item.priceOpen) &&
+                  " + ⚠️ Preis offen"}
+              </h3>
 
               <div className="order-actions">
                 {order.status === "new" && (
@@ -676,7 +680,11 @@ function Cashier() {
 
                     {renderOrderNote(order.note)}
 
-                    <h3>Total: {Number(order.total || 0).toFixed(2)}€</h3>
+                    <h3>
+                Total: {Number(order.total || 0).toFixed(2)}€
+                {order.items?.some((item) => item.priceOpen) &&
+                  " + ⚠️ Preis offen"}
+              </h3>
                   </div>
                 ))}
               </div>
